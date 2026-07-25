@@ -1,43 +1,39 @@
 # Modern Data Engineering with Snowflake, DevOps, & Observability
 
-A reference guide covering Snowflake architecture, continuous data engineering (declarative and imperative), automated ingestion via Snowpipe, Database Change Management (DCM), continuous delivery (CI/CD), semi-structured data processing, query performance tuning, and pipeline observability through Snowflake Trail.
+A comprehensive reference guide covering Snowflake architecture, continuous data engineering (declarative and imperative), automated ingestion via Snowpipe, Database Change Management (DCM), continuous delivery (CI/CD), semi-structured data processing, query performance tuning, and pipeline observability through Snowflake Trail.
 
 ---
 
 ## Table of Contents
 
-- [1. Continuous Data Pipelines](https://www.google.com/search?q=%231-continuous-data-pipelines)
-- [1.1 Declarative Pipelines: Dynamic Tables](https://www.google.com/search?q=%2311-declarative-pipelines-dynamic-tables)
-- [1.2 Imperative Pipelines: Tasks, Streams, & DAGs](https://www.google.com/search?q=%2312-imperative-pipelines-tasks-streams--dags)
-- [1.3 Automated Continuous Ingestion: Snowpipe](https://www.google.com/search?q=%2313-automated-continuous-ingestion-snowpipe)
-- [1.4 Pipeline Architecture Comparison](https://www.google.com/search?q=%2314-pipeline-architecture-comparison)
-
-- [2. DevOps in Data Engineering](https://www.google.com/search?q=%232-devops-in-data-engineering)
-- [2.1 Core DevOps Pillars](https://www.google.com/search?q=%2321-core-devops-pillars)
-- [2.2 Snowflake Git Integration Setup](https://www.google.com/search?q=%2322-snowflake-git-integration-setup)
-
-- [3. Database Change Management (DCM)](https://www.google.com/search?q=%233-database-change-management-dcm)
-- [3.1 Imperative vs. Declarative Management](https://www.google.com/search?q=%2331-imperative-vs-declarative-management)
-- [3.2 In-Place Upgrades with `CREATE OR ALTER](https://www.google.com/search?q=%2332-in-place-upgrades-with-create-or-alter)`
-
-- [4. Continuous Delivery (CI/CD) Pipeline](https://www.google.com/search?q=%234-continuous-delivery-cicd-pipeline)
-- [4.1 Snowflake CLI (`snow git execute`)](https://www.google.com/search?q=%2341-snowflake-cli-snow-git-execute)
-- [4.2 GitHub Actions Workflow](https://www.google.com/search?q=%2342-github-actions-workflow)
-
-- [5. Data Pipeline Observability (Snowflake Trail)](https://www.google.com/search?q=%235-data-pipeline-observability-snowflake-trail)
-- [5.1 Core Observability Pillars](https://www.google.com/search?q=%2351-core-observability-pillars)
-- [5.2 Event Tables & OpenTelemetry Standard](https://www.google.com/search?q=%2352-event-tables--opentelemetry-standard)
-- [5.3 Logging Implementation](https://www.google.com/search?q=%2353-logging-implementation)
-- [5.4 Tracing Implementation](https://www.google.com/search?q=%2354-tracing-implementation)
-- [5.5 Alerts & Notification Integrations](https://www.google.com/search?q=%2355-alerts--notification-integrations)
-- [5.6 Native & Third-Party Telemetry Tools](https://www.google.com/search?q=%2356-native--third-party-telemetry-tools)
-
-- [6. Data Ingestion & Staging](https://www.google.com/search?q=%236-data-ingestion--staging)
-- [6.1 Stage Categories & Iceberg Compatibility](https://www.google.com/search?q=%2361-stage-categories--iceberg-compatibility)
-- [6.2 Local Uploads via `PUT` and `COPY INTO](https://www.google.com/search?q=%2362-local-uploads-via-put-and-copy-into)`
-
-- [7. Semi-Structured Data Processing (`LATERAL FLATTEN`)](https://www.google.com/search?q=%237-semi-structured-data-processing-lateral-flatten)
-- [8. Performance Tuning & Micro-Partition Clustering](https://www.google.com/search?q=%238-performance-tuning--micro-partition-clustering)
+- [1. Continuous Data Pipelines](#1-continuous-data-pipelines)
+  - [1.1 Declarative Pipelines: Dynamic Tables](#11-declarative-pipelines-dynamic-tables)
+  - [1.2 Imperative Pipelines: Streams, Tasks, & DAGs](#12-imperative-pipelines-streams-tasks--dags)
+  - [1.3 Deep-Dive: Streams Mechanics & Pipeline Use Cases](#13-deep-dive-streams-mechanics--pipeline-use-cases)
+  - [1.4 Automated Continuous Ingestion: Snowpipe](#14-automated-continuous-ingestion-snowpipe)
+  - [1.5 Pipeline Architecture Comparison](#15-pipeline-architecture-comparison)
+- [2. DevOps in Data Engineering](#2-devops-in-data-engineering)
+  - [2.1 Core DevOps Pillars](#21-core-devops-pillars)
+  - [2.2 Snowflake Git Integration Setup](#22-snowflake-git-integration-setup)
+- [3. Database Change Management (DCM)](#3-database-change-management-dcm)
+  - [3.1 Imperative vs. Declarative Management](#31-imperative-vs-declarative-management)
+  - [3.2 In-Place Upgrades with `CREATE OR ALTER`](#32-in-place-upgrades-with-create-or-alter)
+- [4. Continuous Delivery (CI/CD) Pipeline](#4-continuous-delivery-cicd-pipeline)
+  - [4.1 Snowflake CLI (`snow git execute`)](#41-snowflake-cli-snow-git-execute)
+  - [4.2 GitHub Actions Workflow](#42-github-actions-workflow)
+- [5. Data Pipeline Observability (Snowflake Trail)](#5-data-pipeline-observability-snowflake-trail)
+  - [5.1 Core Observability Pillars](#51-core-observability-pillars)
+  - [5.2 Snowflake Trail Framework & OpenTelemetry Standard](#52-snowflake-trail-framework--opentelemetry-standard)
+  - [5.3 Event Tables Setup](#53-event-tables-setup)
+  - [5.4 Logging Implementation](#54-logging-implementation)
+  - [5.5 Tracing Implementation](#55-tracing-implementation)
+  - [5.6 Alerts & Notification Integrations](#56-alerts--notification-integrations)
+  - [5.7 Native & Third-Party Telemetry Tools](#57-native--third-party-telemetry-tools)
+- [6. Data Ingestion & Staging](#6-data-ingestion--staging)
+  - [6.1 Stage Categories & Iceberg Compatibility](#61-stage-categories--iceberg-compatibility)
+  - [6.2 Local Uploads via `PUT` and `COPY INTO`](#62-local-uploads-via-put-and-copy-into)
+- [7. Semi-Structured Data Processing (`LATERAL FLATTEN`)](#7-semi-structured-data-processing-lateral-flatten)
+- [8. Performance Tuning & Micro-Partition Clustering](#8-performance-tuning--micro-partition-clustering)
 
 ---
 
@@ -106,7 +102,7 @@ ALTER DYNAMIC TABLE SALES_BY_CATEGORY RESUME;
 
 ---
 
-### 1.2 Imperative Pipelines: Tasks, Streams, & DAGs
+### 1.2 Imperative Pipelines: Streams, Tasks, & DAGs
 
 Imperative pipelines require data engineers to define the explicit step-by-step logic, schedule triggers, dependency graphs, and Change Data Capture (CDC) processing rules.
 
@@ -121,16 +117,6 @@ Imperative pipelines require data engineers to define the explicit step-by-step 
                                      (AFTER Root)            (AFTER Root)
 
 ```
-
-#### Streams (Change Data Capture)
-
-A **Stream** records DML changes (`INSERT`, `UPDATE`, `DELETE`) on a source object and exposes system metadata columns:
-
-- `METADATA$ACTION`: Identifies whether the recorded change was an `INSERT` or `DELETE`.
-- `METADATA$ISUPDATE`: A boolean flag indicating whether the operation was part of an `UPDATE`.
-- `METADATA$ROW_ID`: Unique internal row identifier.
-
-> **Stream Offset Mechanics:** Querying a stream via a standard `SELECT` statement does **not** consume data or advance its tracking offset. The stream's offset advances forward only when its change records are committed in a DML transaction (`INSERT INTO ... SELECT`, `MERGE`, or `UPDATE`).
 
 #### Tasks & Directed Acyclic Graphs (DAGs)
 
@@ -195,7 +181,105 @@ EXECUTE TASK TASK_ROOT_INGEST;
 
 ---
 
-### 1.3 Automated Continuous Ingestion: Snowpipe
+### 1.3 Deep-Dive: Streams Mechanics & Pipeline Use Cases
+
+A **Stream** is a lightweight Change Data Capture (CDC) object in Snowflake that records all Data Manipulation Language (DML) modifications (`INSERT`, `UPDATE`, `DELETE`) made to a source table, view, or stage since a specific point in time.
+
+```
++------------------+         +-------------------------------+         +-----------------------+
+|  Source Table    |  --->   |       Snowflake Stream        |  --->   | Task / MERGE Pipeline |
+|  (Raw Ingestion) |         | (Metadata Deltas & Changes)   |         | (Incremental Load)    |
++------------------+         +-------------------------------+         +-----------------------+
+
+```
+
+#### Key Mechanics of Streams
+
+1. **Offset Tracking:** A stream creates a transactional offset pointer anchored to the source table's micro-partition version. It does not duplicate raw physical data; instead, it tracks micro-partition version changes, preserving storage efficiency.
+2. **System Metadata Columns:** When queried, a stream presents the delta view alongside three system-managed metadata attributes:
+
+- `METADATA$ACTION`: Identifies the operational delta—`INSERT` or `DELETE`.
+- `METADATA$ISUPDATE`: Returns `TRUE` if the change was part of an `UPDATE` command (represented in the stream as a `DELETE` of the old state followed by an `INSERT` of the new state).
+- `METADATA$ROW_ID`: Represents a unique, immutable row identity key used to track rows across updates.
+
+3. **Transaction Offset Consumption:** Reading a stream via a standard `SELECT` query does **not** advance its transactional offset. The offset moves forward only when the stream data is successfully consumed in a committed DML transaction (such as `INSERT INTO ... SELECT`, `MERGE`, or `CREATE TABLE AS SELECT`). If the downstream DML statement fails or rolls back, the stream offset remains unchanged.
+
+#### Types of Streams
+
+- **Standard Streams:** Tracks all DML changes (`INSERT`, `UPDATE`, `DELETE`) on regular tables, views, or external tables.
+- **Append-Only Streams:** Tracks `INSERT` operations only. Ideal for immutable append-only workloads (e.g., event logs, IoT feeds), reducing evaluation overhead by ignoring `UPDATE` and `DELETE` activity.
+- **Insert-Only Streams:** Used exclusively on external tables to track newly added files and records.
+
+#### Primary Pipeline Use Cases for Streams
+
+- **Incremental Micro-Batching:** Avoids costly full-table scans by processing only net-new change data downstream.
+- **SCD Type 2 Dimension Processing:** Pairs with `MERGE INTO` SQL statements in scheduled tasks to track historical dimension changes efficiently.
+- **Cost Minimization via Conditional Tasks:** Combined with `SYSTEM$STREAM_HAS_DATA('stream_name')`, downstream processing compute (warehouses) is triggered only when actionable data changes exist.
+
+#### Complete Stream-Driven MERGE Pipeline Example
+
+```sql
+-- Step 1: Base table receiving raw transactional data
+CREATE OR REPLACE TABLE RAW_TRANSACTIONS (
+    TXN_ID INT,
+    CUST_ID INT,
+    AMOUNT NUMBER(10,2),
+    STATUS STRING,
+    UPDATED_AT TIMESTAMP_NTZ
+);
+
+-- Step 2: Create a Standard Stream on the raw table
+CREATE OR REPLACE STREAM RAW_TXN_STREAM ON TABLE RAW_TRANSACTIONS;
+
+-- Step 3: Target Analytical Table
+CREATE OR REPLACE TABLE CURATED_TRANSACTIONS (
+    TXN_ID INT PRIMARY KEY,
+    CUST_ID INT,
+    AMOUNT NUMBER(10,2),
+    STATUS STRING,
+    LAST_PROCESSED_AT TIMESTAMP_NTZ
+);
+
+-- Step 4: Scheduled Task executing incremental CDC MERGE logic
+CREATE OR REPLACE TASK PROCESS_TXN_STREAM_TASK
+    WAREHOUSE = PRACTICE_WH
+    SCHEDULE = '1 MINUTE'
+    WHEN SYSTEM$STREAM_HAS_DATA('RAW_TXN_STREAM')
+AS
+MERGE INTO CURATED_TRANSACTIONS T
+USING (
+    SELECT
+        TXN_ID,
+        CUST_ID,
+        AMOUNT,
+        STATUS,
+        METADATA$ACTION,
+        METADATA$ISUPDATE
+    FROM RAW_TXN_STREAM
+) S
+ON T.TXN_ID = S.TXN_ID
+-- Handle UPDATES and INSERTS
+WHEN MATCHED AND S.METADATA$ACTION = 'INSERT' AND S.METADATA$ISUPDATE = TRUE THEN
+    UPDATE SET
+        T.AMOUNT = S.AMOUNT,
+        T.STATUS = S.STATUS,
+        T.LAST_PROCESSED_AT = CURRENT_TIMESTAMP()
+-- Handle DELETES
+WHEN MATCHED AND S.METADATA$ACTION = 'DELETE' AND S.METADATA$ISUPDATE = FALSE THEN
+    DELETE
+-- Handle NEW INSERTS
+WHEN NOT MATCHED AND S.METADATA$ACTION = 'INSERT' THEN
+    INSERT (TXN_ID, CUST_ID, AMOUNT, STATUS, LAST_PROCESSED_AT)
+    VALUES (S.TXN_ID, S.CUST_ID, S.AMOUNT, S.STATUS, CURRENT_TIMESTAMP());
+
+-- Enable the Task
+ALTER TASK PROCESS_TXN_STREAM_TASK RESUME;
+
+```
+
+---
+
+### 1.4 Automated Continuous Ingestion: Snowpipe
 
 **Snowpipe** is Snowflake's native, serverless continuous data ingestion service. It continuously loads files into target tables as soon as they are uploaded to an internal or external stage.
 
@@ -251,7 +335,7 @@ ALTER PIPE AUTO_INGEST_LOGS_PIPE SET PIPE_EXECUTION_PAUSED = FALSE;
 
 ---
 
-### 1.4 Pipeline Architecture Comparison
+### 1.5 Pipeline Architecture Comparison
 
 | Feature               | Dynamic Tables                   | Tasks & Streams                      | Snowpipe                             |
 | --------------------- | -------------------------------- | ------------------------------------ | ------------------------------------ |
@@ -466,17 +550,17 @@ jobs:
 
 ## 5. Data Pipeline Observability (Snowflake Trail)
 
-Observability enables data engineers to identify runtime issues, isolate root causes, and monitor performance health across continuous data pipelines. **Snowflake Trail** is Snowflake's native observability framework built on the **OpenTelemetry** standard.
+Observability enables data engineers to identify runtime issues, isolate root causes, and monitor performance health across continuous data pipelines. **Snowflake Trail** is Snowflake's native observability framework designed to standardize telemetry collection and monitoring.
 
 ```
                     Snowflake Trail Observability Architecture
                                         |
       +---------------------------------+---------------------------------+
       |                                 |                                 |
- [ Logs & Traces ]              [ System Metrics ]             [ Alerts & Actions ]
-(Captured in Event Tables)     (Resource / Warehouse Use)     (Notification Integrations)
+ [ Event Tables ]              [ System Metrics ]             [ Alerts & Actions ]
+(OpenTelemetry Logs & Traces) (Resource / Warehouse Use)     (Notification Integrations)
       |                                                                   |
- OpenTelemetry Model                                             Email / Slack / Webhooks / Queues
+ Vendor-Neutral Standard                                     Email / Slack / Webhooks / Queues
 
 ```
 
@@ -485,32 +569,41 @@ Observability enables data engineers to identify runtime issues, isolate root ca
 ### 5.1 Core Observability Pillars
 
 - **Logs:** Immutable, timestamped event records capturing discrete occurrences (start, completion, failures) within code or procedure executions.
-- **Traces:** Detailed, itemized journeys of requests moving through a system. Traces track execution timing, steps, and parent-child dependencies.
+- **Traces:** Detailed, itemized journeys of requests moving through a system. Traces track execution timing, steps, spans, and parent-child dependencies.
 - **Metrics:** Aggregated numeric measurements representing system health, resource consumption, latency distributions, and throughput.
 
 ---
 
-### 5.2 Event Tables & OpenTelemetry Standard
+### 5.2 Snowflake Trail Framework & OpenTelemetry Standard
 
-**Event Tables** are specialized database objects designed to store telemetry logs and traces generated by application code, procedures, and functions. They strictly adhere to the vendor-neutral **OpenTelemetry** column standard.
+**Snowflake Trail** unifies native telemetry objects—Event Tables, Alerts, and Notification Integrations—into a cohesive framework.
+
+- **OpenTelemetry Adherence:** Snowflake Trail is built directly on the **OpenTelemetry (OTel)** open standard. OpenTelemetry provides a vendor-neutral, industry-standard specification for data schemas and telemetry capture.
+- **Interoperability:** Because Snowflake Trail complies with OpenTelemetry standards, telemetry generated in Snowflake can easily integrate into third-party observability dashboards without complex transformation layers.
+
+---
+
+### 5.3 Event Tables Setup
+
+**Event Tables** are specialized database objects used to capture logs and traces emitted by stored procedures, UDFs, and Snowflake applications. They automatically structure incoming data using OpenTelemetry-compliant schema columns.
 
 ```sql
--- Step 1: Create a custom Event Table
+-- Step 1: Create a custom Event Table in target database/schema
 CREATE OR REPLACE EVENT TABLE STAGING_TASTY_BYTES.TELEMETRY.PIPELINE_EVENTS;
 
--- Step 2: Set the newly created Event Table as the active telemetry table for the account
+-- Step 2: Register the table as the active Event Table for the account
 ALTER ACCOUNT SET EVENT_TABLE = STAGING_TASTY_BYTES.TELEMETRY.PIPELINE_EVENTS;
 
--- Step 3: Inspect standard OpenTelemetry schema columns
+-- Step 3: Inspect OpenTelemetry standard columns
 DESCRIBE TABLE STAGING_TASTY_BYTES.TELEMETRY.PIPELINE_EVENTS;
 
 ```
 
 ---
 
-### 5.3 Logging Implementation
+### 5.4 Logging Implementation
 
-Snowflake supports five standard log levels: `DEBUG`, `INFO`, `WARN`, `ERROR`, and `FATAL`. Setting a log level establishes a minimum severity threshold.
+Snowflake supports five standard log levels: `DEBUG`, `INFO`, `WARN`, `ERROR`, and `FATAL`. Setting a log level establishes a minimum severity threshold for telemetry capture.
 
 ```sql
 -- Set Account-level Log Severity Threshold
@@ -532,7 +625,7 @@ $$
 import logging
 import snowflake.snowpark as snowpark
 
-# Instantiate standard logger
+# Instantiate standard Python logger
 logger = logging.getLogger("pipeline_logger")
 
 def run(session: snowpark.Session):
@@ -568,7 +661,7 @@ ORDER BY TIMESTAMP DESC;
 
 ---
 
-### 5.4 Tracing Implementation
+### 5.5 Tracing Implementation
 
 Traces capture execution hierarchies and timing distributions using **Spans** (units of work), **Trace Events** (moments in time), and **Attributes** (key-value tags).
 
@@ -625,7 +718,7 @@ ORDER BY TIMESTAMP DESC;
 
 ---
 
-### 5.5 Alerts & Notification Integrations
+### 5.6 Alerts & Notification Integrations
 
 **Alerts** evaluate data conditions on a schedule, while **Notification Integrations** dispatch automated alerts to external endpoints (Email, Webhooks/Slack, or Cloud Queues).
 
@@ -674,7 +767,7 @@ DROP ALERT ORDER_DATA_QUALITY_ALERT;
 
 ---
 
-### 5.6 Native & Third-Party Telemetry Tools
+### 5.7 Native & Third-Party Telemetry Tools
 
 Because Snowflake Trail adopts standard OpenTelemetry schemas, recorded telemetry data can be exported to third-party monitoring platforms (e.g., Datadog, Grafana, PagerDuty) or visualized natively using Snowflake Dashboards, Snowsight monitoring, and System Views.
 
