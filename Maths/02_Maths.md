@@ -1,4 +1,4 @@
-Here are complete, self-explanatory study notes covering all the topics from the document, organized logically by subject area.
+Here is the complete set of self-explanatory study notes formatted using only **Markdown lists, headers, bold text, and code blocks** (with no Markdown tables) to avoid formatting issues.
 
 ---
 
@@ -12,61 +12,46 @@ Here are complete, self-explanatory study notes covering all the topics from the
 
 Numbers are broadly classified into Real and Imaginary numbers:
 
-| Number Type      | Description & Characteristics                                                       | Examples / Details |
-| ---------------- | ----------------------------------------------------------------------------------- | ------------------ |
-| **Real Numbers** | Numbers that exist on the real number line. Includes rational & irrational numbers. |
+- **Real Numbers**: Numbers that exist on the real number line. Includes rational and irrational numbers, integers, fractions, and non-terminating decimals.
 
-| Includes integers, fractions, non-terminating decimals.
+- **Rational Numbers**: Numbers expressible as a ratio $a / b$ where $b \neq 0$. Decimal expansions either terminate or repeat.
 
-|
-| **Rational Numbers** | Numbers expressible as a ratio $\frac{a}{b}$ where $b \neq 0$.
+- Examples: $9 / 6$; $1 / 3 = 0.333... = 0.\overline{3}$; $1 / 9 = 0.\overline{1}$; $1 / 11 = 0.\overline{09}$.
 
-<br>
+- **Irrational Numbers**: Numbers with non-repeating, non-terminating decimals. Cannot be expressed as exact fractions.
 
-<br>Decimal expansions either terminate or repeat.
+- Examples: $\sqrt{2}$, $\pi$ (Pi).
 
-| $\frac{9}{6}$; $\frac{1}{3} = 0.333... = 0.\overline{3}$;
+- **Imaginary Numbers**: Square roots of negative numbers. Uses $i = \sqrt{-1}$.
 
-<br>
-
-<br>$\frac{1}{9} = 0.\overline{1}$; $\frac{1}{11} = 0.\overline{09}$
-
-|
-| **Irrational Numbers** | Numbers with non-repeating, non-terminating decimals. Cannot be expressed as exact fractions.
-
-| $\sqrt{2}$, $\pi$ (Pi)
-
-|
-| **Imaginary Numbers** | Square roots of negative numbers. Uses $i = \sqrt{-1}$.
-
-| $\sqrt{-4} = 2i$<br> |
+- Example: $\sqrt{-4} = 2i$.
 
 ### **Radical Expressions & Operations**
 
-- **Radical Sign & Radicand:** In $\sqrt[b]{x^a}$, $\sqrt{\ }$ is the **radical sign**, $x^a$ is the **radicand**, and $b$ is the root index.
+- **Radical Sign & Radicand**: In $\sqrt[b]{x^a}$, $\sqrt{\ }$ is the radical sign, $x^a$ is the radicand, and $b$ is the root index.
 
-- **Fractional Exponent Rule:** $x^{\frac{a}{b}} = \sqrt[b]{x^a}$.
+- **Fractional Exponent Rule**: $x^{a/b} = \sqrt[b]{x^a}$.
 
-- **Number of Real Solutions:**
-- **Odd roots** have **one real solution**.
+- **Number of Real Solutions**:
+- Odd roots have one real solution.
 
-- **Even roots** have **two real solutions** (positive and negative).
+- Even roots have two real solutions (positive and negative).
 
-- **Conjugates:** Binomials with opposite signs in the middle, $(x-y)$ and $(x+y)$. Useful for rationalizing radical expressions and complex numbers.
+- **Conjugates**: Binomials with opposite signs in the middle, such as $(x-y)$ and $(x+y)$. Useful for rationalizing radical expressions and complex numbers.
 
 ### **Complex Numbers**
 
-- **Standard Form:** $a + bi$, where $a$ is the real part and $bi$ is the imaginary part.
+- **Standard Form**: $a + bi$, where $a$ is the real part and $bi$ is the imaginary part.
 
-- If $b=0$, it is a **pure real number**.
+- If $b=0$, it is a pure real number.
 
-- If $a=0$, it is a **pure imaginary number**.
+- If $a=0$, it is a pure imaginary number.
 
-- **Powers of $i$:** $i = \sqrt{-1}$, $i^2 = -1$, $i^3 = -i$, $i^4 = 1$.
+- **Powers of $i$**: $i = \sqrt{-1}$, $i^2 = -1$, $i^3 = -i$, $i^4 = 1$.
 
-- **Division / Rationalization:** Multiply the numerator and denominator by the **complex conjugate** of the denominator.
+- **Division / Rationalization**: Multiply the numerator and denominator by the complex conjugate of the denominator.
 
-$$\frac{5+2i}{3-i} \cdot \frac{3+i}{3+i} = \frac{13+11i}{10}$$
+- Example: $\frac{5+2i}{3-i} \cdot \frac{3+i}{3+i} = \frac{13+11i}{10}$.
 
 ---
 
@@ -76,13 +61,13 @@ $$\frac{5+2i}{3-i} \cdot \frac{3+i}{3+i} = \frac{13+11i}{10}$$
 
 Starting from $ax^2 + bx + c = 0$:
 
-1. Divide by $a$: $x^2 + \frac{b}{a}x = -\frac{c}{a}$
+1. Divide by $a$: $x^2 + \frac{b}{a}x = -\frac{c}{a}$.
 
 2. Complete the square by adding $\left(\frac{b}{2a}\right)^2$ to both sides:
 
 $$x^2 + \frac{b}{a}x + \left(\frac{b}{2a}\right)^2 = -\frac{c}{a} + \left(\frac{b}{2a}\right)^2$$
 
-3. Simplify right-hand side:
+3. Simplify the right-hand side:
 
 $$\left(x + \frac{b}{2a}\right)^2 = \frac{b^2 - 4ac}{4a^2}$$
 
@@ -94,9 +79,7 @@ $$x + \frac{b}{2a} = \pm \frac{\sqrt{b^2 - 4ac}}{2a}$$
 
 $$x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$$
 
-> **The Discriminant ($b^2 - 4ac$):**
->
-> - If negative $\rightarrow$ yields imaginary solutions (which come in complex conjugate pairs: $a \pm bi$).
+> **The Discriminant ($b^2 - 4ac$):** If negative, it yields imaginary solutions (which come in complex conjugate pairs: $a \pm bi$).
 
 ### **Rational Roots Test**
 
@@ -104,23 +87,26 @@ To find candidate rational roots for $a_n x^n + ... + a_0 = 0$, test all possibl
 
 $$\frac{\text{Factors of constant term } a_0}{\text{Factors of leading coefficient } a_n}$$
 
-- _Example:_ For $2x^3 + 3x^2 - 3x - 2 = 0$, constant factors are $\pm 1, \pm 2$; leading factors are $\pm 1, \pm 2$. Tested rational possibilities are $\{\pm 1, \pm 2, \pm 1/2\}$.
+- Example: For $2x^3 + 3x^2 - 3x - 2 = 0$, constant factors are $\pm 1, \pm 2$; leading factors are $\pm 1, \pm 2$. Tested rational possibilities are $\{\pm 1, \pm 2, \pm 1/2\}$.
 
 ### **Synthetic Division**
 
 Used as a shortcut to test factors and divide high-degree polynomials.
 
-- **Example Task:** Check if $x - 2 = 0 \implies x = 2$ is a factor of $x^4 + x^3 - 11x^2 - 5x + 30 = 0$:
+- **Example Task**: Check if $x - 2 = 0 \implies x = 2$ is a factor of $x^4 + x^3 - 11x^2 - 5x + 30 = 0$.
 
-$$\begin{array}{r\|rrrrr}     2 & 1 & 1 & -11 & -5 & 30 \\       &   & 2 &   6 & -10 & -30 \\     \hline       & 1 & 3 &  -5 & -15 & \mathbf{0}     \end{array}$$
+- **Steps**:
+- Set up division with root $2$ against coefficients $[1, 1, -11, -5, 30]$.
 
-Since the remainder is $0$, $(x-2)$ is a factor, reducing the expression to $(x-2)(x^3 + 3x^2 - 5x - 15) = 0$.
+- Bringing down terms yields quotient coefficients $[1, 3, -5, -15]$ with remainder $0$.
+
+- Since remainder is $0$, $(x-2)$ is a factor, giving $(x-2)(x^3 + 3x^2 - 5x - 15) = 0$.
 
 - Testing $x = -3$ on the quotient yields quotient $(x^2 - 5)$ with remainder $0$.
 
-- Final factors: $(x-2)(x+3)(x^2 - 5) = 0$.
+- **Final factors**: $(x-2)(x+3)(x^2 - 5) = 0$.
 
-- Roots: $x = 2, -3, \sqrt{5}, -\sqrt{5}$.
+- **Roots**: $x = 2, -3, \sqrt{5}, -\sqrt{5}$.
 
 ---
 
@@ -128,25 +114,25 @@ Since the remainder is $0$, $(x-2)$ is a factor, reducing the expression to $(x-
 
 ### **Lines, Slopes, and Intercepts**
 
-- **Slope Equation:** $m = \frac{\text{rise}}{\text{run}} = \frac{y_2 - y_1}{x_2 - x_1}$
+- **Slope Equation**: $m = \frac{\text{rise}}{\text{run}} = \frac{y_2 - y_1}{x_2 - x_1}$.
 
-- **Vertical Lines:** Infinite rise with zero run $\rightarrow$ Slope is **undefined**.
+- **Vertical Lines**: Infinite rise with zero run $\implies$ Slope is undefined.
 
-- **Horizontal Lines:** Zero rise with infinite run $\rightarrow$ Slope = $0$.
+- **Horizontal Lines**: Zero rise with infinite run $\implies$ Slope = $0$.
 
-- **$y$-intercept:** Value of $y$ when $x = 0$.
+- **$y$-intercept**: Value of $y$ when $x = 0$.
 
-- **Slope-Intercept Form:** $y = mx + c$
+- **Slope-Intercept Form**: $y = mx + c$.
 
-- **Parallel Lines:** Have equal slopes ($m_1 = m_2$).
+- **Parallel Lines**: Have equal slopes ($m_1 = m_2$).
 
-- **Perpendicular Lines:** Slopes are opposite reciprocals ($m_2 = -\frac{1}{m_1}$).
+- **Perpendicular Lines**: Slopes are opposite reciprocals ($m_2 = -1 / m_1$).
 
 ### **Absolute Value Equations**
 
 - $\vert{}x\vert{} = \pm x$.
 
-- _Example:_ $\vert{}x + 3\vert{} = 8 \implies x + 3 = 8$ or $x + 3 = -8 \implies x = 5$ or $x = -11$.
+- Example: $\vert{}x + 3\vert{} = 8 \implies x + 3 = 8$ or $x + 3 = -8 \implies x = 5$ or $x = -11$.
 
 ### **Distance Formula**
 
@@ -160,29 +146,29 @@ $$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
 
 ### **Dimensional Hierarchy & Basics**
 
-- **Point:** 0-Dimensional.
+- **Point**: 0-Dimensional.
 
-- **Line:** 1-Dimensional (extends infinitely in both directions).
+- **Line**: 1-Dimensional (extends infinitely in both directions).
 
-- **Ray:** 1 endpoint, extends infinitely in one direction.
+- **Ray**: 1 endpoint, extends infinitely in one direction.
 
-- **Line Segment:** Finite, 2 endpoints.
+- **Line Segment**: Finite, 2 endpoints.
 
-- **Plane:** 2-Dimensional.
+- **Plane**: 2-Dimensional.
 
-- **Space:** 3-Dimensional.
+- **Space**: 3-Dimensional.
 
 ### **Angles & Parallel Transversals**
 
-- **Types:** Acute ($< 90^\circ$), Right ($= 90^\circ$), Obtuse ($> 90^\circ$ and $< 180^\circ$).
+- **Types**: Acute ($< 90^\circ$), Right ($= 90^\circ$), Obtuse ($> 90^\circ$ and $< 180^\circ$).
 
-- **Complementary:** Add up to $90^\circ$.
+- **Complementary**: Add up to $90^\circ$.
 
-- **Supplementary:** Add up to $180^\circ$.
+- **Supplementary**: Add up to $180^\circ$.
 
-- **Vertical Angles:** Opposite angles formed by intersecting lines (equal).
+- **Vertical Angles**: Opposite angles formed by intersecting lines (equal).
 
-- **Parallel Line Transversal Properties:**
+- **Parallel Line Transversal Properties**:
 - Alternate interior angles are equal.
 
 - Alternate exterior angles are equal.
@@ -193,62 +179,47 @@ $$d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}$$
 
 ### **Triangles & Triangle Centers**
 
-- **Sum of interior angles:** Always $180^\circ$.
+- **Sum of interior angles**: Always $180^\circ$.
 
-- **Pythagorean Theorem Proof:** Constructed via a square of side $(a+b)$ containing four right triangles and an inner square of side $c$:
+- **Pythagorean Theorem Proof**: Constructed via a square of side $(a+b)$ containing four right triangles and an inner square of side $c$:
 
 $$(a+b)^2 = 4\left(\frac{1}{2}ab\right) + c^2 \implies a^2 + 2ab + b^2 = 2ab + c^2 \implies a^2 + b^2 = c^2$$
 
-- **Special Right Triangles:**
+- **Special Right Triangles**:
 - $45^\circ - 45^\circ - 90^\circ$: Sides ratio $x : x : x\sqrt{2}$.
 
 - $30^\circ - 60^\circ - 90^\circ$: Sides ratio $x : x\sqrt{3} : 2x$.
 
-- **Triangle Centers:**
+- **Triangle Centers**:
+- **Circumcenter**: Formed by perpendicular bisectors. Equidistant from vertices. Center of circumscribed circle. Located inside for acute, outside for obtuse, and on hypotenuse for right triangles.
 
-| Center Name      | Formed By Intersection Of | Properties |
-| ---------------- | ------------------------- | ---------- |
-| **Circumcenter** | Perpendicular Bisectors   |
+- **Incenter**: Formed by angle bisectors. Equidistant from all three sides. Center of inscribed circle.
 
-| Equidistant from vertices. Center of circumscribed circle. Inside for acute, outside for obtuse, on hypotenuse for right triangles.
+- **Centroid**: Formed by medians (vertex to midpoint of opposite side). Positioned $2/3$ of the way along the median from vertex to opposite side.
 
-|
-| **Incenter** | Angle Bisectors
+- **Orthocenter**: Formed by altitudes (perpendiculars from vertex to opposite side).
 
-| Equidistant from all three sides. Center of inscribed circle.
-
-|
-| **Centroid** | Medians (vertex to midpoint of opposite side)
-
-| Positioned $\frac{2}{3}$ of the way along the median from vertex to opposite side.
-
-|
-| **Orthocenter** | Altitudes (perpendiculars from vertex to opposite side)
-
-| Intersection point of triangle altitudes.
-
-|
-
-- **Triangle Midsegment Theorem:** Midsegment connecting midpoints of two sides is parallel to the third side and half its length.
+- **Triangle Midsegment Theorem**: Midsegment connecting midpoints of two sides is parallel to the third side and half its length.
 
 ### **2D Shapes & 3D Solids (Area, Surface Area, Volume)**
 
-| Shape / Solid         | Area / Surface Area Formula               | Volume Formula                               |
-| --------------------- | ----------------------------------------- | -------------------------------------------- |
-| **Square**            | $A = \text{side}^2$<br>                   | $V = \text{side}^3$<br>                      |
-| **Rectangle / Prism** | $A = l \times w$<br>                      | $V = l \cdot w \cdot h$<br>                  |
-| **Triangle / Prism**  | $A = \frac{1}{2} b h$<br>                 | $V = \text{Area}_{\text{base}} \times h$<br> |
-| **Trapezoid**         | $A = \frac{b_1 + b_2}{2} \cdot h$<br>     | —                                            |
-| **Circle / Cylinder** | $A = \pi r^2$, Circumference $C = 2\pi r$ |
+- **Square**: Area $= \text{side}^2$, Volume $= \text{side}^3$.
 
-| $SA = 2\pi r^2 + 2\pi r h$; $V = \pi r^2 h$
+- **Rectangle / Prism**: Area $= l \times w$, Volume $= l \cdot w \cdot h$.
 
-|
-| **Pyramid** | $SA = \text{Base Area} + \text{Sides Area}$<br> | $V = \frac{1}{3} \cdot \text{Base Area} \cdot h$<br> |
-| **Cone** | — | $V = \frac{1}{3} \pi r^2 h$<br> |
-| **Sphere** | $SA = 4\pi r^2$<br> | $V = \frac{4}{3} \pi r^3$<br> |
+- **Triangle / Prism**: Area $= \frac{1}{2} b h$, Volume $= \text{Area}_{\text{base}} \times h$.
 
-> **Note on Polyhedra:** A 3D object with flat polygon faces. Cylinders, cones, and spheres are **not** polyhedra because they have curved surfaces.
+- **Trapezoid**: Area $= \frac{b_1 + b_2}{2} \cdot h$.
+
+- **Circle / Cylinder**: Area $= \pi r^2$, Circumference $= 2\pi r$, Cylinder Surface Area $= 2\pi r^2 + 2\pi r h$, Cylinder Volume $= \pi r^2 h$.
+
+- **Pyramid**: Surface Area $= \text{Base Area} + \text{Sides Area}$, Volume $= \frac{1}{3} \cdot \text{Base Area} \cdot h$.
+
+- **Cone**: Volume $= \frac{1}{3} \pi r^2 h$.
+
+- **Sphere**: Surface Area $= 4\pi r^2$, Volume $= \frac{4}{3} \pi r^3$.
+
+> **Note on Polyhedra**: A 3D object with flat polygon faces. Cylinders, cones, and spheres are not polyhedra because they have curved surfaces.
 
 ---
 
@@ -256,22 +227,22 @@ $$(a+b)^2 = 4\left(\frac{1}{2}ab\right) + c^2 \implies a^2 + 2ab + b^2 = 2ab + c
 
 ### **Function Definition & Tests**
 
-- **Function Rule:** Must yield only **one output** ($y$) for every given input ($x$).
+- **Function Rule**: Must yield only one output ($y$) for every given input ($x$).
 
-- **Vertical Line Test:** A graph represents a function if and only if no vertical line intersects it more than once.
+- **Vertical Line Test**: A graph represents a function if and only if no vertical line intersects it more than once.
 
-- **Horizontal Line Test:** Used to determine if a function is **one-to-one** and has a valid inverse function.
+- **Horizontal Line Test**: Used to determine if a function is one-to-one and has a valid inverse function.
 
 ### **Domain, Range, and Multiplicity**
 
-- **Domain:** Set of all valid input values ($x$).
+- **Domain**: Set of all valid input values ($x$).
 
-- **Range:** Set of all possible output values ($y$).
+- **Range**: Set of all possible output values ($y$).
 
-- **Zeros & Multiplicity:**
-- **Odd Multiplicity:** Graph **crosses** the $x$-axis at the zero.
+- **Zeros & Multiplicity**:
+- **Odd Multiplicity**: Graph crosses the $x$-axis at the zero.
 
-- **Even Multiplicity:** Graph **touches** (bounces off) the $x$-axis at the zero.
+- **Even Multiplicity**: Graph touches (bounces off) the $x$-axis at the zero.
 
 ### **General Function Transformations**
 
@@ -289,22 +260,22 @@ For $f(x) = a \cdot g(b(x - h)) + k$:
 
 For polynomial $y = a_n x^n$:
 
-1. **Odd degree, positive coeff:** Drops left, rises right.
+1. **Odd degree, positive coeff**: Drops left, rises right.
 
-2. **Odd degree, negative coeff:** Rises left, drops right.
+2. **Odd degree, negative coeff**: Rises left, drops right.
 
-3. **Even degree, positive coeff:** Rises both left and right.
+3. **Even degree, positive coeff**: Rises both left and right.
 
-4. **Even degree, negative coeff:** Drops both left and right.
+4. **Even degree, negative coeff**: Drops both left and right.
 
 ### **Asymptotes of Rational Functions $\frac{f(x)}{g(x)} = \frac{a x^m + ...}{b x^n + ...}$**
 
-- **Vertical Asymptotes (VA):** Values of $x$ making denominator $g(x) = 0$.
+- **Vertical Asymptotes (VA)**: Values of $x$ making denominator $g(x) = 0$.
 
-- **Horizontal Asymptotes (HA):**
+- **Horizontal Asymptotes (HA)**:
 - If $m < n$: $y = 0$.
 
-- If $m = n$: $y = \frac{a}{b}$.
+- If $m = n$: $y = a / b$.
 
 - If $m > n$: No horizontal asymptote (may have slant asymptote).
 
@@ -316,9 +287,9 @@ For polynomial $y = a_n x^n$:
 
 3. Solve for $y$ to get $f^{-1}(x)$.
 
-- **Property:** $f(f^{-1}(x)) = x$ and $f^{-1}(f(x)) = x$.
+- **Property**: $f(f^{-1}(x)) = x$ and $f^{-1}(f(x)) = x$.
 
-- **Graphical Rule:** $f^{-1}(x)$ is a reflection of $f(x)$ across the line $y = x$.
+- **Graphical Rule**: $f^{-1}(x)$ is a reflection of $f(x)$ across the line $y = x$.
 
 - $\text{Domain of } f(x) = \text{Range of } f^{-1}(x)$ and $\text{Range of } f(x) = \text{Domain of } f^{-1}(x)$.
 
@@ -328,36 +299,33 @@ For polynomial $y = a_n x^n$:
 
 Conic sections are curves formed by intersecting a cone with a plane.
 
-| Conic Section | Eccentricity ($e$) | Standard Equation (Center at $(h,k)$) | Key Properties / Formulas |
-| ------------- | ------------------ | ------------------------------------- | ------------------------- |
-| **Circle**    | $e = 0$<br>        | $(x - h)^2 + (y - k)^2 = r^2$<br>     | $r =$ radius.             |
+- **Circle**:
+- Eccentricity ($e$): $e = 0$.
 
-|
-| **Ellipse** | $0 < e < 1$<br> | $\frac{(x - h)^2}{a^2} + \frac{(y - k)^2}{b^2} = 1$<br> | Major axis $= 2a$, Minor axis $= 2b$.
+- Standard Equation: $(x - h)^2 + (y - k)^2 = r^2$.
 
-<br>
+- Properties: Center at $(h,k)$, $r =$ radius.
 
-<br>Foci relation: $c^2 = a^2 - b^2$.
+- **Ellipse**:
+- Eccentricity ($e$): $0 < e < 1$.
 
-|
-| **Parabola** | $e = 1$<br> | $y = a(x - h)^2 + k$<br> | Distance to focus = distance to directrix.
+- Standard Equation: $\frac{(x - h)^2}{a^2} + \frac{(y - k)^2}{b^2} = 1$.
 
-<br>
+- Properties: Major axis $= 2a$, Minor axis $= 2b$. Foci relation: $c^2 = a^2 - b^2$.
 
-<br>Vertex $(h, k)$ where $h = -\frac{b}{2a}$.
+- **Parabola**:
+- Eccentricity ($e$): $e = 1$.
 
-|
-| **Hyperbola** | $e > 1$<br> | $\frac{(x - h)^2}{a^2} - \frac{(y - k)^2}{b^2} = 1$<br> | Difference of distances to foci is constant.
+- Standard Equation: $y = a(x - h)^2 + k$.
 
-<br>
+- Properties: Distance to focus = distance to directrix. Vertex $(h, k)$ where $h = -\frac{b}{2a}$.
 
-<br>Foci relation: $c^2 = a^2 + b^2$.
+- **Hyperbola**:
+- Eccentricity ($e$): $e > 1$.
 
-<br>
+- Standard Equation: $\frac{(x - h)^2}{a^2} - \frac{(y - k)^2}{b^2} = 1$.
 
-<br>Asymptotes: $y = \pm \frac{b}{a} x$.
-
-|
+- Properties: Difference of distances to foci is constant. Foci relation: $c^2 = a^2 + b^2$. Asymptotes: $y = \pm \frac{b}{a} x$.
 
 ---
 
@@ -365,13 +333,13 @@ Conic sections are curves formed by intersecting a cone with a plane.
 
 ### **Fundamental Rules & Natural Base $e$**
 
-- **Exponential Form:** $y = b^x$ ($b > 0, b \neq 1$).
+- **Exponential Form**: $y = b^x$ ($b > 0, b \neq 1$).
 
-- **Natural Base $e$:** Derived from continuous compounding:
+- **Natural Base $e$**: Derived from continuous compounding:
 
 $$e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n \approx 2.71828...$$
 
-- **Logarithmic Definition:** $\log_b(x) = y \iff b^y = x$. Natural log $\ln(x) = \log_e(x)$.
+- **Logarithmic Definition**: $\log_b(x) = y \iff b^y = x$. Natural log $\ln(x) = \log_e(x)$.
 
 ### **Logarithm Properties**
 
@@ -379,13 +347,13 @@ $$e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n \approx 2.71828...$$
 
 2. $\log_b(1) = 0$
 
-3. **Product Rule:** $\log_b(xy) = \log_b(x) + \log_b(y)$
+3. **Product Rule**: $\log_b(xy) = \log_b(x) + \log_b(y)$
 
-4. **Quotient Rule:** $\log_b\left(\frac{x}{y}\right) = \log_b(x) - \log_b(y)$
+4. **Quotient Rule**: $\log_b\left(\frac{x}{y}\right) = \log_b(x) - \log_b(y)$
 
-5. **Power Rule:** $\log_b(x^a) = a \log_b(x)$
+5. **Power Rule**: $\log_b(x^a) = a \log_b(x)$
 
-6. **Change of Base Formula:** $\log_b(x) = \frac{\log_a(x)}{\log_a(b)} = \frac{\ln(x)}{\ln(b)}$
+6. **Change of Base Formula**: $\log_b(x) = \frac{\log_a(x)}{\log_a(b)} = \frac{\ln(x)}{\ln(b)}$
 
 ---
 
@@ -393,25 +361,25 @@ $$e = \lim_{n \to \infty} \left(1 + \frac{1}{n}\right)^n \approx 2.71828...$$
 
 ### **Sequences & Factorials**
 
-- **Arithmetic Sequence:** Constant difference between terms ($a_n = 2n + 3 \rightarrow 5, 7, 9, 11$).
+- **Arithmetic Sequence**: Constant difference between terms ($a_n = 2n + 3 \implies 5, 7, 9, 11$).
 
-- **Geometric Sequence:** Constant multiplier between terms ($a_n = 2 \cdot 3^{n-1} \rightarrow 2, 6, 18, 54$).
+- **Geometric Sequence**: Constant multiplier between terms ($a_n = 2 \cdot 3^{n-1} \implies 2, 6, 18, 54$).
 
-- **Fibonacci Sequence:** Recursive formula $a_n = a_{n-1} + a_{n-2}$ ($1, 1, 2, 3, 5, 8, 13...$).
+- **Fibonacci Sequence**: Recursive formula $a_n = a_{n-1} + a_{n-2}$ ($1, 1, 2, 3, 5, 8, 13...$).
 
-- **Factorial:** $n! = n \times (n-1) \times (n-2) \times ... \times 1$.
+- **Factorial**: $n! = n \times (n-1) \times (n-2) \times ... \times 1$.
 
-- **Euler's Series:** $e = 1 + 1 + \frac{1}{2!} + \frac{1}{3!} + \frac{1}{4!} + ... \approx 2.71828...$
+- **Euler's Series**: $e = 1 + 1 + \frac{1}{2!} + \frac{1}{3!} + \frac{1}{4!} + ... \approx 2.71828...$
 
 ### **Permutations vs. Combinations**
 
-- **Permutations (Order Matters):**
+- **Permutations (Order Matters)**:
 
 $$P(n, r) = \frac{n!}{(n-r)!}$$
 
 _(If repetitions allowed: $n^r$ possibilities)_.
 
-- **Combinations (Order Does NOT Matter):**
+- **Combinations (Order Does NOT Matter)**:
 
 $$C(n, r) = \binom{n}{r} = \frac{n!}{r!(n-r)!}$$
 
@@ -421,23 +389,23 @@ $$C(n, r) = \binom{n}{r} = \frac{n!}{r!(n-r)!}$$
 
 ### **Key Formulas & Rules**
 
-1. **Basic Probability:** $P(A) = \frac{\text{Desired Outcomes}}{\text{Total Outcomes}}$
+1. **Basic Probability**: $P(A) = \frac{\text{Desired Outcomes}}{\text{Total Outcomes}}$
 
-2. **Complement Rule:** $P(A') = 1 - P(A)$
+2. **Complement Rule**: $P(A') = 1 - P(A)$
 
-3. **Addition Rule:** $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+3. **Addition Rule**: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
 
 _(If mutually exclusive, $P(A \cap B) = 0$)_.
 
-4. **Multiplication Rule:** $P(A \cap B) = P(A) \cdot P(B\vert{}A)$
+4. **Multiplication Rule**: $P(A \cap B) = P(A) \cdot P(B\vert{}A)$
 
 _(If independent, $P(A \cap B) = P(A) \cdot P(B)$)_.
 
-5. **Conditional Probability:** $P(B\vert{}A) = \frac{P(A \cap B)}{P(A)}$
+5. **Conditional Probability**: $P(B\vert{}A) = \frac{P(A \cap B)}{P(A)}$
 
-6. **Law of Total Probability:** $P(A) = \sum P(A \vert{} B_i) P(B_i)$
+6. **Law of Total Probability**: $P(A) = \sum P(A \vert{} B_i) P(B_i)$
 
-7. **Bayes' Theorem:**
+7. **Bayes' Theorem**:
 
 $$P(A\vert{}B) = \frac{P(B\vert{}A) \cdot P(A)}{P(B)}$$
 
@@ -447,11 +415,11 @@ $$P(A\vert{}B) = \frac{P(B\vert{}A) \cdot P(A)}{P(B)}$$
 
 ### **Radian Measure & Basic Ratios**
 
-- **Radian Definition:** Angle subtended when arc length equals radius ($1 \text{ rev} = 360^\circ = 2\pi \text{ rad}$).
+- **Radian Definition**: Angle subtended when arc length equals radius ($1 \text{ rev} = 360^\circ = 2\pi \text{ rad}$).
 
-- **Conversion:** $\text{Radians} = \text{Degrees} \times \frac{\pi}{180^\circ}$.
+- **Conversion**: $\text{Radians} = \text{Degrees} \times \frac{\pi}{180^\circ}$.
 
-- **Right Triangle Ratios (SOH CAH TOA):**
+- **Right Triangle Ratios (SOH CAH TOA)**:
 
 $$\sin\theta = \frac{\text{opp}}{\text{hyp}}, \quad \cos\theta = \frac{\text{adj}}{\text{hyp}}, \quad \tan\theta = \frac{\text{opp}}{\text{adj}}$$
 
@@ -463,7 +431,7 @@ On a unit circle ($r=1$), any point is $(x, y) = (\cos\theta, \sin\theta)$.
 
 ### **Core Trigonometric Identities**
 
-- **Pythagorean Identities:**
+- **Pythagorean Identities**:
 
 $$\sin^2\theta + \cos^2\theta = 1$$
 
@@ -471,31 +439,31 @@ $$1 + \tan^2\theta = \sec^2\theta$$
 
 $$1 + \cot^2\theta = \csc^2\theta$$
 
-- **Cofunction Identities:** $\sin(90^\circ - \theta) = \cos\theta$, $\tan(90^\circ - \theta) = \cot\theta$.
+- **Cofunction Identities**: $\sin(90^\circ - \theta) = \cos\theta$, $\tan(90^\circ - \theta) = \cot\theta$.
 
-- **Sum & Difference Formulas:**
+- **Sum & Difference Formulas**:
 
 $$\sin(A \pm B) = \sin A \cos B \pm \cos A \sin B$$
 
 $$\cos(A \pm B) = \cos A \cos B \mp \sin A \sin B$$
 
-- **Double Angle Formulas:**
+- **Double Angle Formulas**:
 
 $$\sin(2\theta) = 2\sin\theta\cos\theta$$
 
 $$\cos(2\theta) = \cos^2\theta - \sin^2\theta = 2\cos^2\theta - 1 = 1 - 2\sin^2\theta$$
 
-- **Power Reduction Formulas:**
+- **Power Reduction Formulas**:
 
 $$\sin^2\theta = \frac{1 - \cos(2\theta)}{2}, \quad \cos^2\theta = \frac{1 + \cos(2\theta)}{2}$$
 
 ### **Laws for Oblique Triangles**
 
-- **Law of Sines:** $\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$
+- **Law of Sines**: $\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$
 
-- **Law of Cosines:** $a^2 = b^2 + c^2 - 2bc\cos A$
+- **Law of Cosines**: $a^2 = b^2 + c^2 - 2bc\cos A$
 
-- **Area of Triangle:** $\text{Area} = \frac{1}{2}bc\sin A$
+- **Area of Triangle**: $\text{Area} = \frac{1}{2}bc\sin A$
 
 ---
 
@@ -505,22 +473,22 @@ $$\sin^2\theta = \frac{1 - \cos(2\theta)}{2}, \quad \cos^2\theta = \frac{1 + \co
 
 Described as $(r, \theta)$ instead of rectangular $(x, y)$.
 
-- **Conversion to Rectangular:** $x = r\cos\theta$, $y = r\sin\theta$.
+- **Conversion to Rectangular**: $x = r\cos\theta$, $y = r\sin\theta$.
 
-- **Conversion to Polar:** $r^2 = x^2 + y^2$, $\tan\theta = \frac{y}{x}$.
+- **Conversion to Polar**: $r^2 = x^2 + y^2$, $\tan\theta = \frac{y}{x}$.
 
 ### **Parametric Equations**
 
 $x$ and $y$ are expressed independently in terms of a third parameter $t$.
 
-- _Example:_ $x = 2t$, $y = t^2$.
+- Example: $x = 2t$, $y = t^2$.
 
-- **Eliminating parameter $t$:** $t = \frac{x}{2} \implies y = \left(\frac{x}{2}\right)^2 = \frac{x^2}{4}$ (Equation of a parabola).
+- **Eliminating parameter $t$**: $t = \frac{x}{2} \implies y = \left(\frac{x}{2}\right)^2 = \frac{x^2}{4}$ (Equation of a parabola).
 
 ### **Introduction to Calculus Concepts**
 
-- **Differential Calculus:** Concerned with instantaneous rate of change and slopes of curves.
+- **Differential Calculus**: Concerned with instantaneous rate of change and slopes of curves.
 
-- **Integral Calculus:** Concerned with accumulation and area under a curve.
+- **Integral Calculus**: Concerned with accumulation and area under a curve.
 
-- **Zeno's Paradox:** Conceptual foundation that performing an operation infinitely many times can yield a finite, deterministic result.
+- **Zeno's Paradox**: Conceptual foundation that performing an operation infinitely many times can yield a finite, deterministic result.
