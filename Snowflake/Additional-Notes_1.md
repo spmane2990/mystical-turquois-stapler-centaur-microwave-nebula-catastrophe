@@ -1,6 +1,6 @@
-# Modern Data Engineering with Snowflake, DevOps, & Observability
+# Modern Data Engineering with Snowflake, DevOps, Observability, & Extensibility
 
-A comprehensive reference guide covering Snowflake architecture, continuous data engineering (declarative and imperative), automated ingestion via Snowpipe, Database Change Management (DCM), continuous delivery (CI/CD), semi-structured data processing, query performance tuning, and pipeline observability through Snowflake Trail.
+A comprehensive reference guide covering Snowflake architecture, continuous data engineering (declarative and imperative), automated ingestion via Snowpipe, Database Change Management (DCM), continuous delivery (CI/CD), Snowflake CLI command reference, Streamlit application deployment, UDTF extensibility, semi-structured data processing, query performance tuning, and pipeline observability through Snowflake Trail.
 
 ---
 
@@ -9,7 +9,7 @@ A comprehensive reference guide covering Snowflake architecture, continuous data
 - [1. Continuous Data Pipelines](#1-continuous-data-pipelines)
   - [1.1 Declarative Pipelines: Dynamic Tables](#11-declarative-pipelines-dynamic-tables)
   - [1.2 Imperative Pipelines: Streams, Tasks, & DAGs](#12-imperative-pipelines-streams-tasks--dags)
-  - [1.3 Deep-Dive: Streams Mechanics & Pipeline Use Cases](#13-deep-dive-streams-mechanics--pipeline-use-cases)
+  - [1.3 Deep-Dive: Streams Mechanics & Efficient Transformations](#13-deep-dive-streams-mechanics--efficient-transformations)
   - [1.4 Automated Continuous Ingestion: Snowpipe](#14-automated-continuous-ingestion-snowpipe)
   - [1.5 Pipeline Architecture Comparison](#15-pipeline-architecture-comparison)
 - [2. DevOps in Data Engineering](#2-devops-in-data-engineering)
@@ -18,9 +18,12 @@ A comprehensive reference guide covering Snowflake architecture, continuous data
 - [3. Database Change Management (DCM)](#3-database-change-management-dcm)
   - [3.1 Imperative vs. Declarative Management](#31-imperative-vs-declarative-management)
   - [3.2 In-Place Upgrades with `CREATE OR ALTER`](#32-in-place-upgrades-with-create-or-alter)
-- [4. Continuous Delivery (CI/CD) Pipeline](#4-continuous-delivery-cicd-pipeline)
-  - [4.1 Snowflake CLI (`snow git execute`)](#41-snowflake-cli-snow-git-execute)
-  - [4.2 GitHub Actions Workflow](#42-github-actions-workflow)
+- [4. Continuous Delivery (CI/CD) & Tooling](#4-continuous-delivery-cicd--tooling)
+  - [4.1 Snowflake CLI & `config.toml` Configuration](#41-snowflake-cli--configtoml-configuration)
+  - [4.2 Comprehensive Snowflake CLI Reference (`snow` Commands & Examples)](#42-comprehensive-snowflake-cli-reference-snow-commands--examples)
+  - [4.3 CLI Pipeline Deployment (`snow git execute`)](#43-cli-pipeline-deployment-snow-git-execute)
+  - [4.4 Streamlit in Snowflake (SiS) & Command Documentation](#44-streamlit-in-snowflake-sis--command-documentation)
+  - [4.5 GitHub Actions Workflow](#45-github-actions-workflow)
 - [5. Data Pipeline Observability (Snowflake Trail)](#5-data-pipeline-observability-snowflake-trail)
   - [5.1 Core Observability Pillars](#51-core-observability-pillars)
   - [5.2 Snowflake Trail Framework & OpenTelemetry Standard](#52-snowflake-trail-framework--opentelemetry-standard)
@@ -29,11 +32,15 @@ A comprehensive reference guide covering Snowflake architecture, continuous data
   - [5.5 Tracing Implementation](#55-tracing-implementation)
   - [5.6 Alerts & Notification Integrations](#56-alerts--notification-integrations)
   - [5.7 Native & Third-Party Telemetry Tools](#57-native--third-party-telemetry-tools)
-- [6. Data Ingestion & Staging](#6-data-ingestion--staging)
-  - [6.1 Stage Categories & Iceberg Compatibility](#61-stage-categories--iceberg-compatibility)
-  - [6.2 Local Uploads via `PUT` and `COPY INTO`](#62-local-uploads-via-put-and-copy-into)
-- [7. Semi-Structured Data Processing (`LATERAL FLATTEN`)](#7-semi-structured-data-processing-lateral-flatten)
-- [8. Performance Tuning & Micro-Partition Clustering](#8-performance-tuning--micro-partition-clustering)
+- [6. Advanced Transformations: User-Defined Table Functions (UDTFs)](#6-advanced-transformations-user-defined-table-functions-udtfs)
+  - [6.1 UDTF Overview & Scalar vs. Tabular Comparison](#61-udtf-overview--scalar-vs-tabular-comparison)
+  - [6.2 SQL & Python/Snowpark UDTF Implementation Examples](#62-sql--pythonsnowpark-udtf-implementation-examples)
+  - [6.3 Practical Industry Use Cases](#63-practical-industry-use-cases)
+- [7. Data Ingestion & Staging](#7-data-ingestion--staging)
+  - [7.1 Stage Categories & Iceberg Compatibility](#71-stage-categories--iceberg-compatibility)
+  - [7.2 Local Uploads via `PUT` and `COPY INTO`](#72-local-uploads-via-put-and-copy-into)
+- [8. Semi-Structured Data Processing (`LATERAL FLATTEN`)](#8-semi-structured-data-processing-lateral-flatten)
+- [9. Performance Tuning & Micro-Partition Clustering](#9-performance-tuning--micro-partition-clustering)
 
 ---
 
@@ -181,7 +188,7 @@ EXECUTE TASK TASK_ROOT_INGEST;
 
 ---
 
-### 1.3 Deep-Dive: Streams Mechanics & Pipeline Use Cases
+### 1.3 Deep-Dive: Streams Mechanics & Efficient Transformations
 
 A **Stream** is a lightweight Change Data Capture (CDC) object in Snowflake that records all Data Manipulation Language (DML) modifications (`INSERT`, `UPDATE`, `DELETE`) made to a source table, view, or stage since a specific point in time.
 
@@ -193,9 +200,13 @@ A **Stream** is a lightweight Change Data Capture (CDC) object in Snowflake that
 
 ```
 
+#### Why Streams? The Inefficiency of Reprocessing
+
+In standard batch transformations, updating derived views or aggregate summary tables requires reading and scanning the entire base dataset repeatedly. For example, if a table contains 20,000,000 rows and 1,000 new rows are appended overnight, scanning all 20,000,000+ rows to compute a daily aggregate is vastly inefficient. Streams eliminate this overhead by tracking net-new changes (deltas), enabling data engineers to process **only the 1,000 changed rows** and combine those results with existing aggregations.
+
 #### Key Mechanics of Streams
 
-1. **Offset Tracking:** A stream creates a transactional offset pointer anchored to the source table's micro-partition version. It does not duplicate raw physical data; instead, it tracks micro-partition version changes, preserving storage efficiency.
+1. **Offset Tracking:** A stream creates a transactional offset pointer anchored to the source table's micro-partition version. It does not duplicate raw physical storage; instead, it tracks micro-partition version changes.
 2. **System Metadata Columns:** When queried, a stream presents the delta view alongside three system-managed metadata attributes:
 
 - `METADATA$ACTION`: Identifies the operational delta—`INSERT` or `DELETE`.
@@ -210,70 +221,62 @@ A **Stream** is a lightweight Change Data Capture (CDC) object in Snowflake that
 - **Append-Only Streams:** Tracks `INSERT` operations only. Ideal for immutable append-only workloads (e.g., event logs, IoT feeds), reducing evaluation overhead by ignoring `UPDATE` and `DELETE` activity.
 - **Insert-Only Streams:** Used exclusively on external tables to track newly added files and records.
 
-#### Primary Pipeline Use Cases for Streams
-
-- **Incremental Micro-Batching:** Avoids costly full-table scans by processing only net-new change data downstream.
-- **SCD Type 2 Dimension Processing:** Pairs with `MERGE INTO` SQL statements in scheduled tasks to track historical dimension changes efficiently.
-- **Cost Minimization via Conditional Tasks:** Combined with `SYSTEM$STREAM_HAS_DATA('stream_name')`, downstream processing compute (warehouses) is triggered only when actionable data changes exist.
-
-#### Complete Stream-Driven MERGE Pipeline Example
+#### Complete Stream Testing & Incremental Pipeline Example
 
 ```sql
--- Step 1: Base table receiving raw transactional data
-CREATE OR REPLACE TABLE RAW_TRANSACTIONS (
-    TXN_ID INT,
-    CUST_ID INT,
-    AMOUNT NUMBER(10,2),
-    STATUS STRING,
-    UPDATED_AT TIMESTAMP_NTZ
+-- Step 1: Create a base table and stream
+CREATE OR REPLACE TABLE TASTY_BYTES.RAW_POS.ORDER_HEADER (
+    ORDER_ID INT,
+    LOCATION_ID INT,
+    TOTAL_AMOUNT NUMBER(10,2),
+    ORDER_TS TIMESTAMP_NTZ
 );
 
--- Step 2: Create a Standard Stream on the raw table
-CREATE OR REPLACE STREAM RAW_TXN_STREAM ON TABLE RAW_TRANSACTIONS;
+CREATE OR REPLACE STREAM ORDER_HEADER_STREAM
+ON TABLE TASTY_BYTES.RAW_POS.ORDER_HEADER;
 
--- Step 3: Target Analytical Table
-CREATE OR REPLACE TABLE CURATED_TRANSACTIONS (
-    TXN_ID INT PRIMARY KEY,
-    CUST_ID INT,
-    AMOUNT NUMBER(10,2),
-    STATUS STRING,
-    LAST_PROCESSED_AT TIMESTAMP_NTZ
+-- Step 2: Insert dummy operational data to trigger stream tracking
+INSERT INTO TASTY_BYTES.RAW_POS.ORDER_HEADER VALUES
+    (1001, 55, 45.50, CURRENT_TIMESTAMP());
+
+-- Step 3: Inspect stream deltas and system metadata columns
+SELECT
+    ORDER_ID,
+    LOCATION_ID,
+    TOTAL_AMOUNT,
+    METADATA$ACTION,
+    METADATA$ISUPDATE,
+    METADATA$ROW_ID
+FROM ORDER_HEADER_STREAM;
+
+-- Step 4: Downstream Target Summary Table
+CREATE OR REPLACE TABLE DAILY_CITY_METRICS (
+    LOCATION_ID INT PRIMARY KEY,
+    TOTAL_SALES NUMBER(10,2),
+    LAST_UPDATED TIMESTAMP_NTZ
 );
 
--- Step 4: Scheduled Task executing incremental CDC MERGE logic
-CREATE OR REPLACE TASK PROCESS_TXN_STREAM_TASK
-    WAREHOUSE = PRACTICE_WH
-    SCHEDULE = '1 MINUTE'
-    WHEN SYSTEM$STREAM_HAS_DATA('RAW_TXN_STREAM')
-AS
-MERGE INTO CURATED_TRANSACTIONS T
+-- Step 5: Process Stream incrementally using MERGE
+MERGE INTO DAILY_CITY_METRICS T
 USING (
     SELECT
-        TXN_ID,
-        CUST_ID,
-        AMOUNT,
-        STATUS,
-        METADATA$ACTION,
-        METADATA$ISUPDATE
-    FROM RAW_TXN_STREAM
+        LOCATION_ID,
+        SUM(TOTAL_AMOUNT) AS DELTA_SALES
+    FROM ORDER_HEADER_STREAM
+    WHERE METADATA$ACTION = 'INSERT'
+    GROUP BY LOCATION_ID
 ) S
-ON T.TXN_ID = S.TXN_ID
--- Handle UPDATES and INSERTS
-WHEN MATCHED AND S.METADATA$ACTION = 'INSERT' AND S.METADATA$ISUPDATE = TRUE THEN
+ON T.LOCATION_ID = S.LOCATION_ID
+WHEN MATCHED THEN
     UPDATE SET
-        T.AMOUNT = S.AMOUNT,
-        T.STATUS = S.STATUS,
+        T.TOTAL_SALES = T.TOTAL_SALES + S.DELTA_SALES,
         T.LAST_PROCESSED_AT = CURRENT_TIMESTAMP()
--- Handle DELETES
-WHEN MATCHED AND S.METADATA$ACTION = 'DELETE' AND S.METADATA$ISUPDATE = FALSE THEN
-    DELETE
--- Handle NEW INSERTS
-WHEN NOT MATCHED AND S.METADATA$ACTION = 'INSERT' THEN
-    INSERT (TXN_ID, CUST_ID, AMOUNT, STATUS, LAST_PROCESSED_AT)
-    VALUES (S.TXN_ID, S.CUST_ID, S.AMOUNT, S.STATUS, CURRENT_TIMESTAMP());
+WHEN NOT MATCHED THEN
+    INSERT (LOCATION_ID, TOTAL_SALES, LAST_UPDATED)
+    VALUES (S.LOCATION_ID, S.DELTA_SALES, CURRENT_TIMESTAMP());
 
--- Enable the Task
-ALTER TASK PROCESS_TXN_STREAM_TASK RESUME;
+-- Querying the stream again returns 0 rows because the offset advanced upon MERGE commit!
+SELECT * FROM ORDER_HEADER_STREAM;
 
 ```
 
@@ -462,30 +465,198 @@ CREATE OR ALTER TABLE STAGING_TASTY_BYTES.RAW_POS.COUNTRY (
 
 ---
 
-## 4. Continuous Delivery (CI/CD) Pipeline
+## 4. Continuous Delivery (CI/CD) & Tooling
 
 Continuous Delivery (CD) automates deploying source-controlled code to dedicated staging and production environments.
 
+---
+
+### 4.1 Snowflake CLI & `config.toml` Configuration
+
+The **Snowflake CLI** (`snow`) relies on a configuration file located at `~/.snowflake/config.toml` to manage authentication profiles across environments (`default`, `staging`, `prod`).
+
+#### Sample `config.toml` Setup
+
+```toml
+[connections.default]
+account = "orgname-accountname"
+user = "CI_CD_USER"
+password = "StrongPassword123!"
+role = "SYSADMIN"
+warehouse = "COMPUTE_WH"
+database = "COURSE_REPO"
+schema = "PUBLIC"
+
+[connections.staging]
+account = "orgname-accountname"
+user = "DEPLOY_STAGING_USER"
+password = "StagingPassword123!"
+role = "STAGING_ADMIN"
+warehouse = "STAGING_WH"
+database = "STAGING_TASTY_BYTES"
+schema = "PUBLIC"
+
+[connections.prod]
+account = "orgname-accountname"
+user = "DEPLOY_PROD_USER"
+password = "ProdPassword123!"
+role = "PROD_ADMIN"
+warehouse = "PROD_WH"
+database = "PROD_TASTY_BYTES"
+schema = "PUBLIC"
+
 ```
-                       CI/CD Deployment Workflow
-                                   |
-[ Push / Pull Request ] ---> [ GitHub Actions Pipeline ]
-                                   |
-                     Installs Snowflake CLI & Credentials
-                                   |
-                 Calls 'snow git execute' with Params
-                                   |
-               +-------------------+-------------------+
-               |                                       |
-    [ Target: STAGING Database ]           [ Target: PROD Database ]
+
+#### Environment Variable Overrides for Secure CI/CD Pipelines
+
+In automated runners (e.g., GitHub Actions), hardcoding passwords in `config.toml` is avoided by substituting Snowflake CLI environment variables:
+
+- `SNOWFLAKE_CONNECTIONS_DEFAULT_ACCOUNT`
+- `SNOWFLAKE_CONNECTIONS_DEFAULT_USER`
+- `SNOWFLAKE_CONNECTIONS_DEFAULT_PASSWORD`
+- `SNOWFLAKE_CONNECTIONS_DEFAULT_ROLE`
+- `SNOWFLAKE_CONNECTIONS_DEFAULT_WAREHOUSE`
+
+---
+
+### 4.2 Comprehensive Snowflake CLI Reference (`snow` Commands & Examples)
+
+The Snowflake CLI (`snow`) provides unified command groups to manage projects, profiles, SQL scripts, database objects, file stages, and modern workloads directly from terminal endpoints or CI/CD pipelines.
+
+#### 1. General & Global Options
+
+Global flags and project initialization tools.
+
+- `snow --help` — Displays available command groups, arguments, and global options.
+- `snow --version` — Shows the installed CLI tool version.
+- `snow --info` — Prints environment configuration summaries and the active `config.toml` path.
+- `snow init` — Initializes a boilerplate developer project from a template.
+
+```bash
+# Display help guide
+snow --help
+
+# Check active environment and config file path
+snow --info
+
+# Initialize a new project directory using a template
+snow init my_snowflake_project
+
+```
+
+#### 2. Connection Management
+
+Commands for managing connection profiles defined in `~/.snowflake/config.toml`.
+
+- `snow connection add` — Launches an interactive guide to add a new connection profile.
+- `snow connection list` — Displays configured connection profiles.
+- `snow connection test` — Tests connectivity to Snowflake for the active connection profile.
+- `snow connection set-default` — Sets a profile as the default primary connection.
+
+```bash
+# Add a new connection profile interactively
+snow connection add
+
+# List configured profiles
+snow connection list
+
+# Test active connection profile
+snow connection test -c staging
+
+# Set default connection profile
+snow connection set-default prod
+
+```
+
+#### 3. SQL Execution
+
+Commands for executing ad-hoc queries or SQL script files.
+
+- `snow sql -q "<query>"` — Executes a raw SQL query string directly.
+- `snow sql -f <file.sql>` — Runs SQL statements contained in a local file.
+
+```bash
+# Execute raw ad-hoc query
+snow sql -q "SELECT CURRENT_ACCOUNT(), CURRENT_WAREHOUSE()"
+
+# Execute local script file against staging environment
+snow sql -f ./scripts/deploy_tables.sql -c staging
+
+```
+
+#### 4. Managing Database Objects
+
+CLI interfaces for viewing, describing, and dropping database objects.
+
+- `snow object list <type>` — Lists objects of a specified type (e.g., `database`, `table`, `warehouse`).
+- `snow object describe <type> <name>` — Displays metadata and structural details for an object.
+- `snow object drop <type> <name>` — Permanently drops the specified database object.
+
+```bash
+# List all dynamic tables in active schema
+snow object list dynamic-table
+
+# Describe structure of a specific table
+snow object describe table STAGING_TASTY_BYTES.RAW_POS.COUNTRY
+
+# Drop a temporary warehouse
+snow object drop warehouse TEMP_DEV_WH
+
+```
+
+#### 5. Working with Stages & Files
+
+Commands for provisioning internal stages and executing file transfers.
+
+- `snow stage create <stage_name>` — Provisions an internal stage.
+- `snow stage list-files <stage_name>` — Lists files stored in a stage.
+- `snow stage copy <local_path> @<stage_name>/` — Uploads local files to a stage.
+- `snow stage copy @<stage_name>/<remote_file> <local_dir>/` — Downloads files from a stage to local storage.
+
+```bash
+# Create an internal stage
+snow stage create MY_APP_STAGE
+
+# Upload a local CSV file to the internal stage
+snow stage copy ./data/raw_sales.csv @MY_APP_STAGE/raw/
+
+# List staged files
+snow stage list-files @MY_APP_STAGE
+
+# Download staged file to local directory
+snow stage copy @MY_APP_STAGE/raw/raw_sales.csv ./downloads/
+
+```
+
+#### 6. Deploying Modern Workloads
+
+Commands for deploying Streamlit apps, Snowpark packages, Native Apps, and containerized services.
+
+- `snow streamlit deploy` — Deploys local Streamlit code to Snowflake.
+- `snow snowpark deploy` — Packages and registers Snowpark Python UDFs or stored procedures.
+- `snow app run` — Builds, deploys, and executes a Snowflake Native App locally or in a test account.
+- `snow spcs service create` — Deploys containerized applications to Snowpark Container Services (SPCS).
+
+```bash
+# Deploy Streamlit app from local directory
+snow streamlit deploy --app-name hamburg_dashboard
+
+# Build and register Snowpark Python functions
+snow snowpark deploy --replace
+
+# Test run a Snowflake Native App
+snow app run
+
+# Deploy a container service to Snowpark Container Services (SPCS)
+snow spcs service create my_app_service --compute-pool GPU_POOL --spec-path ./spec.yaml
 
 ```
 
 ---
 
-### 4.1 Snowflake CLI (`snow git execute`)
+### 4.3 CLI Pipeline Deployment (`snow git execute`)
 
-The `Snowflake CLI` executes files or directory trees directly from Snowflake Git repository objects while interpolating runtime parameters.
+The `snow git execute` command runs files or directory trees directly from a native Snowflake Git repository stage while interpolating runtime parameters.
 
 ```bash
 # Execute staging environment setup with variable parameterization
@@ -504,7 +675,70 @@ snow git execute @COURSE_REPO.PUBLIC.ADVANCED_DATA_ENGINEERING_SNOWFLAKE/branche
 
 ---
 
-### 4.2 GitHub Actions Workflow
+### 4.4 Streamlit in Snowflake (SiS) & Command Documentation
+
+**Streamlit in Snowflake (SiS)** allows developers to build, host, and share interactive Python web apps natively inside Snowflake, running directly against Snowflake data using Snowpark sessions.
+
+#### Creating Streamlit Apps via SQL & Git Repos
+
+Streamlit applications can be instantiated directly using SQL or loaded from repository stage objects.
+
+```sql
+-- Create Streamlit App pointing to a repository stage path
+CREATE OR REPLACE STREAMLIT STAGING_TASTY_BYTES.PUBLIC.HAMBURG_WEATHER_APP
+    ROOT_LOCATION = '@COURSE_REPO.PUBLIC.ADVANCED_DATA_ENGINEERING_SNOWFLAKE/branches/main/module1/hamburg_weather/streamlits'
+    MAIN_FILE = 'app.py'
+    QUERY_WAREHOUSE = PRACTICE_WH;
+
+```
+
+#### Streamlit Application Code Pattern (`app.py`)
+
+```python
+import streamlit as st
+from snowflake.snowpark.context import get_active_session
+
+st.title("Hamburg Sales & Weather Dashboard")
+
+# Obtain active Snowpark session inside Snowflake
+session = get_active_session()
+
+# Parameterize database environment dynamically
+env = st.sidebar.selectbox("Environment", ["STAGING", "PROD"])
+db_name = f"{env}_TASTY_BYTES"
+
+query = f"""
+    SELECT SALE_DATE, CATEGORY, TOTAL_PRICE
+    FROM {db_name}.PUBLIC.SALES_BY_CATEGORY
+    ORDER BY SALE_DATE DESC
+"""
+
+# Query data and render natively in Streamlit
+df = session.sql(query).to_pandas()
+st.dataframe(df)
+st.line_chart(df, x="SALE_DATE", y="TOTAL_PRICE")
+
+```
+
+#### Deploying Streamlit Apps via Snowflake CLI (`snow streamlit`)
+
+The Snowflake CLI provides dedicated commands to manage Streamlit projects:
+
+```bash
+# Initialize a local Streamlit project template
+snow streamlit init my_streamlit_app
+
+# Deploy a Streamlit app to Snowflake
+snow streamlit deploy --app-name hamburg_dashboard --database STAGING_TASTY_BYTES --schema PUBLIC
+
+# Share application with specific user roles
+snow streamlit share hamburg_dashboard --role ANALYST_ROLE
+
+```
+
+---
+
+### 4.5 GitHub Actions Workflow
 
 This workflow (`.github/workflows/main.yaml`) deploys code into Snowflake `STAGING` or `PROD` databases automatically whenever changes are pushed or merged into `staging` or `main` branches.
 
@@ -773,7 +1007,94 @@ Because Snowflake Trail adopts standard OpenTelemetry schemas, recorded telemetr
 
 ---
 
-## 6. Data Ingestion & Staging
+## 6. Advanced Transformations: User-Defined Table Functions (UDTFs)
+
+User-Defined Table Functions (UDTFs) are custom functions that return a **tabular dataset** (zero, one, or multiple rows consisting of one or more structured columns) for each row passed into them, unlike scalar UDFs which return a single value per input.
+
+---
+
+### 6.1 UDTF Overview & Scalar vs. Tabular Comparison
+
+| Feature               | Scalar UDF                                     | User-Defined Table Function (UDTF)                                      |
+| --------------------- | ---------------------------------------------- | ----------------------------------------------------------------------- |
+| **Output Type**       | Single scalar value (e.g., `STRING`, `FLOAT`). | Tabular result set (`TABLE(col1 type1, col2 type2)`).                   |
+| **Row Multiplicity**  | Exactly 1 output row per 1 input row.          | 0, 1, or $N$ output rows per input row.                                 |
+| **SQL Invocation**    | `SELECT my_udf(col) FROM table`                | `SELECT * FROM table, TABLE(my_udtf(col))`                              |
+| **Primary Use Cases** | Simple calculations, string manipulation.      | Array explosion, sessionization, time-series expansion, ML predictions. |
+
+---
+
+### 6.2 SQL & Python/Snowpark UDTF Implementation Examples
+
+#### SQL UDTF Example: Date Range Generator
+
+```sql
+-- SQL UDTF expanding start and end dates into daily rows
+CREATE OR REPLACE FUNCTION GENERATE_DATE_SERIES(start_date DATE, end_date DATE)
+RETURNS TABLE (generated_date DATE)
+AS
+$$
+    SELECT DATEADD('day', SEQ4(), start_date) AS generated_date
+    FROM TABLE(GENERATOR(ROWCOUNT => 1000))
+    WHERE DATEADD('day', SEQ4(), start_date) <= end_date
+$$;
+
+-- Invoking SQL UDTF
+SELECT * FROM TABLE(GENERATE_DATE_SERIES('2026-07-01'::DATE, '2026-07-05'::DATE));
+
+```
+
+#### Python/Snowpark UDTF Example: Sessionizing Web Events
+
+A Python UDTF is defined as a class implementing a `process()` method for row-level evaluation and an optional `end_partition()` method for partition-wide aggregations.
+
+```sql
+CREATE OR REPLACE FUNCTION SESSIONIZE_USER_EVENTS(click_time TIMESTAMP_NTZ)
+RETURNS TABLE (session_id INT, event_time TIMESTAMP_NTZ)
+LANGUAGE PYTHON
+RUNTIME_VERSION = '3.10'
+PACKAGES = ('pandas')
+HANDLER = 'SessionizerUDTF'
+AS
+$$
+class SessionizerUDTF:
+    def __init__(self):
+        self.session_id = 1
+        self.last_time = None
+
+    def process(self, click_time):
+        # 30-minute inactivity session boundary (1800 seconds)
+        if self.last_time is not None:
+            delta = (click_time - self.last_time).total_seconds()
+            if delta > 1800:
+                self.session_id += 1
+
+        self.last_time = click_time
+        yield (self.session_id, click_time)
+$$;
+
+-- Invoking Python UDTF over partitioned dataset
+SELECT
+    u.user_id,
+    s.session_id,
+    s.event_time
+FROM USER_CLICKS u,
+TABLE(SESSIONIZE_USER_EVENTS(u.click_time) OVER (PARTITION BY u.user_id ORDER BY u.click_time)) s;
+
+```
+
+---
+
+### 6.3 Practical Industry Use Cases
+
+- **Custom Semi-Structured Unnesting:** Expanding non-standard, deeply nested multi-level JSON schemas into structured relational rows.
+- **Sessionization & User Analytics:** Calculating clickstream session boundaries over partition windows.
+- **Time-Series Gap Filling:** Generating missing continuous time buckets for metrics aggregation.
+- **Multi-Row ML Predictions:** Returning top-$K$ class classification probabilities per row from Python ML models.
+
+---
+
+## 7. Data Ingestion & Staging
 
 Stages serve as intermediate locations for files before loading them into relational tables.
 
@@ -790,7 +1111,7 @@ Stages serve as intermediate locations for files before loading them into relati
 
 ---
 
-### 6.1 Stage Categories & Iceberg Compatibility
+### 7.1 Stage Categories & Iceberg Compatibility
 
 | Stage Category      | Description                                                                                                              | Iceberg Table Support                                                        |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
@@ -799,7 +1120,7 @@ Stages serve as intermediate locations for files before loading them into relati
 
 ---
 
-### 6.2 Local Uploads via `PUT` and `COPY INTO`
+### 7.2 Local Uploads via `PUT` and `COPY INTO`
 
 Files on a developer endpoint can be staged via `PUT` commands and loaded using `COPY INTO` with error handling flags.
 
@@ -824,7 +1145,7 @@ ON_ERROR = 'CONTINUE';
 
 ---
 
-## 7. Semi-Structured Data Processing (`LATERAL FLATTEN`)
+## 8. Semi-Structured Data Processing (`LATERAL FLATTEN`)
 
 Semi-structured JSON datasets are ingested into `VARIANT` columns. Specific properties are accessed using dot/bracket notation, and nested arrays are expanded into relational rows using `LATERAL FLATTEN`.
 
@@ -856,7 +1177,7 @@ LATERAL FLATTEN(INPUT => SRC_VARIANT:restaurants) f;
 
 ---
 
-## 8. Performance Tuning & Micro-Partition Clustering
+## 9. Performance Tuning & Micro-Partition Clustering
 
 Snowflake stores table data in compressed, columnar micro-partitions. Over time, table modifications can cause key ranges to scatter across micro-partitions. The `SYSTEM$CLUSTERING_INFORMATION` function measures partition health and key overlaps.
 
