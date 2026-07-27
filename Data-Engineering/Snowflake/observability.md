@@ -1,9 +1,5 @@
 # A Three-Level Observability Maturity Framework for Snowflake
 
-**Date:** July 27, 2026
-
-**Executive Summary:** Moving beyond “did my job run?” to full data and AI traceability — natively within Snowflake.
-
 ---
 
 ## Executive Overview & Architectural Philosophy
