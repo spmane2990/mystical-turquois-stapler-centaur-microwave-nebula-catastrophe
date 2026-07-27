@@ -1,3 +1,7 @@
+Here is your complete **AWS Data Engineering Architecture Manual** with all non-breaking spaces, copy-paste artifacts, broken backticks, and formatting inconsistencies fully cleaned up and standardized.
+
+---
+
 # AWS Data Engineering Architecture Manual
 
 _A Production-Grade Architectural Guide for Principal Data Engineers, Enterprise Architects & Cloud Solution Leads_
@@ -28,7 +32,7 @@ Modern AWS data architectures leverage the **Data Lakehouse pattern**, decouplin
 │                              │ (Governance / Fine RLS)───────►│ Amazon Athena       │   │
 │                              └──────────────────────┘        │ (Trino Engine)      │   │
 │                                                              └─────────────────────┘   │
-└─────────────────────────────────────────────────────────────────────────────────────────┘
+└────────────────────────────────────────────────────────────────────────────────────────┘
 
 ```
 
