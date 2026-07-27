@@ -1,6 +1,6 @@
-Here is your complete **AWS Data Engineering Architecture Manual** with all non-breaking spaces, copy-paste artifacts, broken backticks, and formatting inconsistencies fully cleaned up and standardized.
+The issue is that your text still contains **invisible non-breaking space characters (`\u00a0`)**. Many Markdown parsers fail to render code blocks, tables, lists, and line breaks properly when `\u00a0` characters are present instead of standard spaces (`\u0020`).
 
----
+Here is the document with **every single non-breaking space completely purged and converted to standard ASCII spaces**, ensuring it renders perfectly in any Markdown viewer:
 
 # AWS Data Engineering Architecture Manual
 
