@@ -1,6 +1,6 @@
----
-
 # A Three-Level Observability Maturity Framework for Snowflake
+
+**Date:** July 27, 2026
 
 **Executive Summary:** Moving beyond “did my job run?” to full data and AI traceability — natively within Snowflake.
 
@@ -28,7 +28,8 @@ Snowflake provides a comprehensive, native stack of observability tools. However
 | - Classification Drift & Semantic Shift Tracking                                  |
 +-----------------------------------------------------------------------------------+
 | LEVEL 2: DATA QUALITY ENFORCEMENT & FINOPS COST ATTRIBUTION                      |
-| - Native System & Custom Data Metric Functions (DMFs)                             |
+| - Native System & Custom Data Metric Functions (DMFs) vs dbt/Great Expectations   |
+| - Full Taxonomy: Accuracy, Uniqueness, Volume, Freshness, Statistics              |
 | - Granular Failed-Row Extraction via SYSTEM$DATA_METRIC_SCAN                     |
 | - Automated Anomaly Detection over DMF Historical Records                         |
 | - Compute & Serverless FinOps (Warehouse Metering, DMF Costs, Resource Monitors)  |
@@ -196,25 +197,45 @@ ALTER ALERT ALERT_TASK_FAILURE RESUME;
 
 Level 2 upgrades monitoring from structural pipeline execution to semantic data correctness and FinOps cost transparency: _Is the data correct, complete, and fresh? And who is paying for it?_
 
-1. **System & Custom Data Metric Functions (DMFs):** DMFs execute natively on serverless infrastructure (without requiring active user warehouses). Metrics are stored continuously in system history views.
+#### 1. Data Metric Functions (DMFs) vs. External Tools
 
-- **System DMFs:** `NULL_COUNT`, `BLANK_COUNT`, `DUPLICATE_COUNT`, `UNIQUE_COUNT`, `ROW_COUNT`, `FRESHNESS`, `SCHEMA_CHANGE_COUNT`.
-- **Custom DMFs:** Domain-specific or industry-specific rule validation.
+Data Metric Functions are Snowflake’s native alternative to external data quality frameworks like **dbt tests** or **Great Expectations**. Unlike third-party tools that require dedicated orchestration servers or compute instances:
 
-2. **Row Extraction (`SYSTEM$DATA_METRIC_SCAN`):** Rather than outputting aggregate failure totals, this function returns the specific primary keys/rows that failed checks, facilitating rapid remediation.
-3. **Automated Anomaly Detection:** Applies time-series forecasting over historic DMF results to flag unexpected variance even when metrics stay within static thresholds.
-4. **FinOps Cost Attribution Matrix:**
+- **Serverless Execution:** DMFs operate independently of user-managed virtual warehouses, running on Snowflake's serverless compute layer.
+- **Declarative Schedules:** Execution intervals are specified directly on table objects.
+- **Historical Quality Record:** Outputs persist automatically into system views, creating an audit record for data quality tracking over time.
 
-- `QUERY_TAG`: Attributes session compute to business units/projects.
-- `WAREHOUSE_METERING_HISTORY`: Measures virtual warehouse compute usage.
-- `DATA_QUALITY_MONITORING_USAGE_HISTORY`: Tracks serverless compute consumed by DMF quality checks.
-- `RESOURCE_MONITORS`: Hard limits to prevent budget overruns.
+#### 2. Native System DMF Taxonomy
+
+Snowflake provides built-in system DMFs covering common data quality dimensions:
+
+| Quality Dimension           | System Data Metric Functions (DMFs)               | Operational Purpose                                                              |
+| --------------------------- | ------------------------------------------------- | -------------------------------------------------------------------------------- |
+| **Accuracy / Completeness** | `NULL_COUNT`, `BLANK_COUNT`, `INVALID_JSON_COUNT` | Detects missing values, whitespace-only strings, or malformed JSON payloads.     |
+| **Uniqueness**              | `DUPLICATE_COUNT`, `UNIQUE_COUNT`                 | Ensures key integrity and flags row duplication.                                 |
+| **Volume**                  | `ROW_COUNT`                                       | Tracks table growth trends and flags unexpected bulk deletions or empty loads.   |
+| **Freshness & Schema**      | `FRESHNESS`, `SCHEMA_CHANGE_COUNT`                | Verifies SLA compliance on load times and tracks structural DDL modifications.   |
+| **Statistics**              | `AVG`, `MEDIAN`, `STDDEV`, `APPROX_QUANTILE`      | Monitors numeric distributions to detect unexpected metric variance or outliers. |
+
+#### 3. Custom DMFs, Row Extraction & Anomaly Detection
+
+- **Custom DMFs:** Used to encode domain business rules (e.g., enforcing financial threshold limits or regulatory pattern formats).
+- **Granular Failure Extraction (`SYSTEM$DATA_METRIC_SCAN`):** Returns the specific failing rows rather than aggregate metrics, allowing teams to locate and fix bad records directly.
+- **Automated Anomaly Detection:** Uses historical DMF metric records to detect when a value deviates from predicted ranges—flagging anomalies even if they fall within broad static thresholds.
+
+#### 4. FinOps Cost Attribution Matrix
+
+- **`QUERY_TAG`:** Session-level tags that flow into query history, enabling cost allocation by team, project, or workflow.
+- **`WAREHOUSE_METERING_HISTORY`:** Measures virtual warehouse credit consumption over time.
+- **`DATA_QUALITY_MONITORING_USAGE_HISTORY`:** Tracks serverless compute consumed specifically by DMF quality checks.
+- **Resource Monitors:** Hard guardrails that suspend warehouses when budgets are exceeded.
 
 ### Operational Definition of "Good" at Level 2
 
+- Every critical table has freshness and completeness checks attached.
 - Quality violations trigger automated alerts within **5 minutes** of DML execution.
 - Failed records are extractable for triage via automated scripts.
-- Every query is tagged, enabling transparent departmental chargebacks across compute, quality checks, and storage.
+- Every team knows their monthly compute and data quality monitoring spend.
 
 ### Complete Implementation Script (Level 2)
 
@@ -232,11 +253,12 @@ ALTER SESSION SET QUERY_TAG = '{"team": "finance", "project": "revenue_recon"}';
 CREATE OR REPLACE TABLE FINANCIAL_RECORDS (
     RECORD_ID STRING PRIMARY KEY,
     ACCOUNT_NUMBER STRING,
+    PAYLOAD_JSON STRING,
     TRANSACTION_AMOUNT NUMBER(15, 2),
     LAST_UPDATED TIMESTAMP_NTZ
 );
 
--- 2. Create Custom Data Metric Function (DMF)
+-- 2. Create Custom Data Metric Function (DMF) for Domain Validation
 CREATE OR REPLACE DATA METRIC FUNCTION DMF_NEGATIVE_AMOUNT_COUNT(
     ARG_TABLE TABLE(TRANSACTION_AMOUNT NUMBER(15, 2))
 )
@@ -252,8 +274,16 @@ $$;
 ALTER TABLE FINANCIAL_RECORDS SET DATA_METRIC_SCHEDULE = '15 MINUTE';
 
 ALTER TABLE FINANCIAL_RECORDS ADD DATA METRIC FUNCTION
+    -- Accuracy / Completeness
     SNOWFLAKE.CORE.NULL_COUNT ON (ACCOUNT_NUMBER),
+    SNOWFLAKE.CORE.BLANK_COUNT ON (ACCOUNT_NUMBER),
+    SNOWFLAKE.CORE.INVALID_JSON_COUNT ON (PAYLOAD_JSON),
+    -- Uniqueness & Volume
+    SNOWFLAKE.CORE.DUPLICATE_COUNT ON (RECORD_ID),
+    SNOWFLAKE.CORE.ROW_COUNT ON (),
+    -- Freshness & Schema
     SNOWFLAKE.CORE.FRESHNESS ON (LAST_UPDATED),
+    -- Custom Business Rule
     DMF_NEGATIVE_AMOUNT_COUNT ON (TRANSACTION_AMOUNT);
 
 -- 4. Query Historical Data Quality Results
@@ -285,7 +315,8 @@ SELECT
     ENTITY_NAME,
     CREDITS_USED
 FROM SNOWFLAKE.ACCOUNT_USAGE.DATA_QUALITY_MONITORING_USAGE_HISTORY
-WHERE START_TIME >= DATEADD('day', -7, CURRENT_TIMESTAMP());
+WHERE START_TIME >= DATEADD('day', -7, CURRENT_TIMESTAMP())
+ORDER BY START_TIME DESC;
 
 ```
 
@@ -297,16 +328,17 @@ WHERE START_TIME >= DATEADD('day', -7, CURRENT_TIMESTAMP());
 
 Level 3 addresses modern Generative AI and LLM workloads: _What did the AI decide, why, at what cost, and is it still performing as expected?_
 
-1. **Token-Level Billing Granularity (`CORTEX_AI_FUNCTIONS_USAGE_HISTORY`):** Tracks function calls (`AI_CLASSIFY`, `AI_COMPLETE`, `AI_EXTRACT`), input/output token counts, and exact credit consumption with max 5-minute latency.
-2. **Span-Level Agent Tracing (`AI_OBSERVABILITY_EVENTS`):** OpenTelemetry-native execution traces for Cortex Agents. Captures planning decisions, vector tool usage, SQL execution, and user feedback.
-3. **Prompt Safety & Injection Guardrails (`CORTEX_AI_GUARDRAILS_USAGE_HISTORY`):** Monitors real-time guardrail triggers, prompt injection attempts, and tool security flags.
-4. **Model Output & Classification Drift Detection:** Tracks output distribution over rolling windows to identify semantic drift, concept drift, or model performance degradation.
+1. **Token-Level Billing Granularity (`CORTEX_AI_FUNCTIONS_USAGE_HISTORY`):** Tracks function calls (`AI_CLASSIFY`, `AI_COMPLETE`, `AI_EXTRACT`), model used, query ID, user, token counts (input/output), and exact credit consumption with max 5-minute latency.
+2. **Span-Level Agent Tracing (`AI_OBSERVABILITY_EVENTS` via `SNOWFLAKE.LOCAL`):** OpenTelemetry-native execution traces for Cortex Agents and Cortex Code. Captures LLM planning decisions, tool selection and execution (Cortex Search, Cortex Analyst, SQL execution), response generation, and user feedback (thumbs up/down).
+3. **Prompt Safety & Injection Guardrails (`CORTEX_AI_GUARDRAILS_USAGE_HISTORY`):** Monitors the prompt injection detection layer. Every request to a Cortex Agent is scanned, recording flagged requests, tool types involved, and security signals for auditing.
+4. **Model Drift Detection:** Implemented pattern on top of inference logging by tracking classification distributions over time (e.g., ratio of positive/negative/neutral sentiment labels week-over-week) to detect data drift, concept drift, or model degradation.
 
 ### Operational Definition of "Good" at Level 3
 
-- Every LLM invocation is logged with token consumption and query lineage.
-- Token spend is bounded by automated alert thresholds.
-- Weekly semantic drift analysis monitors output distribution stability.
+- Every AI function call is logged with inputs, outputs, and token consumption.
+- Token spend is bounded by budget guardrails and automated alert thresholds.
+- Classification distribution is tracked weekly with automated drift alerts.
+- Guardrail activations are routinely reviewed by security teams.
 
 ### Complete Implementation Script (Level 3)
 
@@ -377,7 +409,7 @@ WHERE CURRENT_WEEK.EVAL_WEEK = DATE_TRUNC('week', CURRENT_DATE());
 
 ## Progression Roadmap & Implementation Strategy
 
-Organizations should implement this framework iteratively:
+Organizations should implement this maturity model incrementally:
 
 ```text
 [Level 1: Pipeline Health] ---> [Level 2: Data Quality & FinOps] ---> [Level 3: AI Observability]
@@ -385,30 +417,22 @@ Organizations should implement this framework iteratively:
 
 ```
 
-1. **Step 1: Deploy Level 1 First.** Without baseline pipeline health, data quality tests will evaluate stale data, and downstream AI applications will fail due to upstream pipeline outages.
-2. **Step 2: Add Level 2 Controls.** Data quality checks establish organizational trust. Implementing FinOps cost controls prevents budget surprises as compute usage scales.
-3. **Step 3: Roll Out Level 3 for GenAI Workloads.** Deploy AI observability as Cortex LLM workflows and AI agents transition to production.
+1. **Level 1 to Start:** Poor pipelines render downstream quality checks useless (as they assess outdated data) and make AI lineage irrelevant (since jobs fail before execution).
+2. **Level 2 Next:** Quality control establishes the baseline trust needed before expanding into AI functionality. Flaws in underlying data carry forward into AI models trained or prompted with that data.
+3. **Level 3 at AI Deployment:** Deploy full AI observability when moving LLM applications to production, avoiding unnecessary compute and engineering costs prior to deployment.
 
 ---
 
 ## Competitive Differentiation: Why Native Snowflake Observability Wins
 
 - **Unified Schema & Telemetry:** Event tables store pipeline telemetry, UDF performance metrics, and AI agent traces within the same native schema.
-- **Single Alerting Engine:** Alerts handle task failures, data quality violations, and AI budget threshold breaches using a uniform syntax.
-- **Integrated FinOps:** `ACCOUNT_USAGE` views unify credit consumption across virtual warehouses, serverless DMF execution, and AI tokens.
-- **Serverless Isolation:** Serverless execution for DMFs, tasks, and alerts ensures observability checks operate independently without competing for production warehouse resources.
-- **Zero Third-Party Overhead:** Eliminates external agents, secondary security/RBAC platforms, and duplicate data storage costs.
+- **Single Alerting Engine:** System alerts respond to task failures, data quality violations, and AI budget threshold breaches using a uniform mechanism.
+- **Integrated FinOps:** `ACCOUNT_USAGE` views offer an integrated billing system across virtual warehouses, storage, serverless DMF execution, and AI tokens.
+- **Serverless Isolation:** Serverless execution for DMFs, tasks, and alerts ensures observability workloads do not compete with production compute.
+- **Zero Third-Party Overhead:** Eliminates the typical anti-pattern of maintaining a separate observability platform with distinct security guarantees, access control systems, and pricing models.
 
 ---
 
 ## Deployment Repository & Resources
 
-For a complete, automated end-to-end implementation including deployment scripts, sample data generators, and a Streamlit dashboard, access the official repository:
-
-- **GitHub Repository:** [github.com/riyakh/Snowflake-Demos](https://www.google.com/search?q=https://github.com/riyakh/Snowflake-Demos)
-- **Deployment Features:**
-- Complete 3-stage Task DAG with stream CDC.
-- 6 System and Custom DMFs with intentional failure generators.
-- Cortex AI classification, token history auditing, and drift detection.
-- Native Streamlit-in-Snowflake monitoring dashboard.
-- Single-click deployment and teardown scripts (under 5 minutes deployment time).
+A complete reference implementation containing working SQL scripts and dashboards is available on GitHub:
