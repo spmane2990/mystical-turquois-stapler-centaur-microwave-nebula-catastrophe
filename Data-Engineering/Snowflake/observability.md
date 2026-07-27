@@ -1,5 +1,3 @@
----
-
 # A Three-Level Observability Maturity Framework for Snowflake
 
 **Executive Summary:** Moving beyond “did my job run?” to full data and AI traceability — natively within Snowflake.
