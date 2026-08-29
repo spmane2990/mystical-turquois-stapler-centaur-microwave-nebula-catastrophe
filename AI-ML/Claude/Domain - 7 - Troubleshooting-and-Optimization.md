@@ -83,15 +83,10 @@ Achieving a high-quality answer once is only the first step. Optimizing means st
 
 **Domain 7 & Course Summary: The Complete Associate Toolkit**
 
-```
-┌────────────────────────────────────────────────────────────────────────────────────────┐
-│  D1: PROMPT CRAFT    ──► Structure briefs with R-C-T-C-F & decompose steps[cite: 16]          │
-│  D2: VALIDATION      ──► Accuracy vs. completeness; never trust unhedged tone[cite: 16]      │
-│  D3: PRODUCT & MODEL ──► Match features (Projects/Artifacts) and models to stakes[cite: 16]   │
-│  D4: WORKFLOW DESIGN ──► Augment existing pipelines; map bottlenecks before AI[cite: 16]      │
-│  D5: CONFIGURATION   ──► Build Projects (Instructions + Knowledge); prevent drift[cite: 16]   │
-│  D6: GOVERNANCE      ──► Enforce suitability, mask PII, and maintain human control[cite: 16]  │
-│  D7: OPTIMIZATION    ──► Diagnose causes systematically; optimize daily workflows[cite: 16]   │
-└────────────────────────────────────────────────────────────────────────────────────────┘
-
-```
+- **D1: PROMPT CRAFT** ──► Structure briefs with R-C-T-C-F & decompose steps[cite: 16]
+- **D2: VALIDATION** ──► Accuracy vs. completeness; never trust unhedged tone[cite: 16]
+- **D3: PRODUCT & MODEL** ──► Match features (Projects/Artifacts) and models to stakes[cite: 16]
+- **D4: WORKFLOW DESIGN** ──► Augment existing pipelines; map bottlenecks before AI[cite: 16]
+- **D5: CONFIGURATION** ──► Build Projects (Instructions + Knowledge); prevent drift[cite: 16]
+- **D6: GOVERNANCE** ──► Enforce suitability, mask PII, and maintain human control[cite: 16]
+- **D7: OPTIMIZATION** ──► Diagnose causes systematically; optimize daily workflows[cite: 16]

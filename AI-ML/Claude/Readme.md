@@ -6,16 +6,10 @@ A comprehensive, structured study repository covering the 7 core domains of the 
 
 ## 📚 Repository Structure & Module Overview
 
-| Domain       | File Name                                                                                                    | Primary Focus & Core Concepts                                                      |
-| ------------ | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| **Domain 1** | [`Domain - 1 - Prompting-and-Task-Execution.md`](./Domain%20-%202%20-%20Output-Evaluation-and-Validation.md) | • **R-C-T-C-F Framework** (Role, Context, Task, Constraints, Format)[cite: 10]<br> |
-
-<br>• The "Guess Test" & prompt maturity ladders[cite: 10]<br>
-
-<br>• Task decomposition (Sequential, Parallel, Hierarchical)[cite: 10]<br>
-
-<br>• Strategy by task type (Analysis, Research, Drafting, Brainstorming)[cite: 10] |
-| **Domain 2** | [`Domain - 2 - Output-Evaluation-and-Validation.md`](./Domain%20-%202%20-%20Output-Evaluation-and-Validation.md) | • **Golden Rule**: _Confident is not correct_[cite: 11]<br>
+| Domain       | File Name                                                                                                        | Primary Focus & Core Concepts                                                                                                                                                                                                                                                                      |
+| ------------ | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Domain 1** | [`Domain - 1 - Prompting-and-Task-Execution.md`](./Domain%20-%201%20-%20Prompting-and-Task-Execution.md)         | • **R-C-T-C-F Framework** (Role, Context, Task, Constraints, Format)[cite: 10]<br>• The "Guess Test" & prompt maturity ladders[cite: 10]<br>• Task decomposition (Sequential, Parallel, Hierarchical)[cite: 10]<br>• Strategy by task type (Analysis, Research, Drafting, Brainstorming)[cite: 10] |
+| **Domain 2** | [`Domain - 2 - Output-Evaluation-and-Validation.md`](./Domain%20-%202%20-%20Output-Evaluation-and-Validation.md) | • **Golden Rule**: _Confident is not correct_[cite: 11]<br>                                                                                                                                                                                                                                        |
 
 <br>• Accuracy vs. Completeness & The Completeness Trap[cite: 11]<br>
 

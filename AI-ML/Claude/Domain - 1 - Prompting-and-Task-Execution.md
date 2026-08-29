@@ -72,24 +72,13 @@ Complex requests fail when asked all at once because effort spreads thin, early 
 
 **The Diagnosis & Correction Table**
 
-| Subjective Feeling | Actionable Prompt Instruction |
-| ------------------ | ----------------------------- |
-
-| "Too long"
-
-| `"Cut to 100 words"`<br> |
-| "Too formal"
-
-| `"Rewrite as if explaining to a friend"`<br> |
-| "Wrong focus"
-
-| `"Lead with the price advantage, not the features"`<br> |
-| "Made things up"
-
-| `"Only use facts from the document I shared"`<br> |
-| "Boring"
-
-| `"Open with a question, use active voice"`<br> |
+| Subjective Feeling | Actionable Prompt Instruction                       |
+| ------------------ | --------------------------------------------------- |
+| "Too long"         | `"Cut to 100 words"`                                |
+| "Too formal"       | `"Rewrite as if explaining to a friend"`            |
+| "Wrong focus"      | `"Lead with the price advantage, not the features"` |
+| "Made things up"   | `"Only use facts from the document I shared"`       |
+| "Boring"           | `"Open with a question, use active voice"`          |
 
 - **Few-Shot Examples**: Providing a concrete input-output sample communicates tone, structure, and length better than descriptive adjectives.
 
@@ -103,52 +92,12 @@ Complex requests fail when asked all at once because effort spreads thin, early 
 
 A tight constraint set enhances drafting but restricts brainstorming. Match the prompt architecture to the operational objective:
 
-| Task Type        | Objective & Core Fear        | Key Prompt Requirements | Special Prompting Move |
-| ---------------- | ---------------------------- | ----------------------- | ---------------------- |
-| **Analysis**<br> | **Want**: Insight & judgment |
-
-<br>
-
-<br>**Fear**: Surface summary
-
-| Supply full raw data; specify analytical lens (e.g., cost, retention)
-
-| Ask for underlying reasoning and what the data _cannot_ tell you.
-
-|
-| **Research**<br> | **Want**: Verified facts
-
-<br>
-
-<br>**Fear**: Hallucinations
-
-| Separate known facts from inferences; demand citations
-
-| Require explicit uncertainty flags (`"Mark as Confirmed/Uncertain; say 'not sure' instead of guessing"`).
-
-|
-| **Drafting**<br> | **Want**: Production copy
-
-<br>
-
-<br>**Fear**: Generic filler
-
-| Lock the 4 pillars: Audience, Tone, Length, Format
-
-| Provide a reference sample of the target voice.
-
-|
-| **Brainstorming**<br> | **Want**: Volume & range
-
-<br>
-
-<br>**Fear**: Safe, obvious ideas
-
-| Remove constraints; explicitly permit unconventional ideas
-
-| **Diverge first** (ask for 15+ ideas), then **Converge** (filter/rank) in a second prompt.
-
-|
+| Task Type         | Objective & Core Fear                                     | Key Prompt Requirements                                               | Special Prompting Move                                                                                    |
+| ----------------- | --------------------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| **Analysis**      | **Want**: Insight & judgment<br>**Fear**: Surface summary | Supply full raw data; specify analytical lens (e.g., cost, retention) | Ask for underlying reasoning and what the data _cannot_ tell you.                                         |
+| **Research**      | **Want**: Verified facts<br>**Fear**: Hallucinations      | Separate known facts from inferences; demand citations                | Require explicit uncertainty flags (`"Mark as Confirmed/Uncertain; say 'not sure' instead of guessing"`). |
+| **Drafting**      | **Want**: Production copy<br>**Fear**: Generic filler     | Lock the 4 pillars: Audience, Tone, Length, Format                    | Provide a reference sample of the target voice.                                                           |
+| **Brainstorming** | **Want**: Volume & range<br>**Fear**: Safe, obvious ideas | Remove constraints; explicitly permit unconventional ideas            | **Diverge first** (ask for 15+ ideas), then **Converge** (filter/rank) in a second prompt.                |
 
 ---
 

@@ -104,10 +104,7 @@ Passing every legal and company rule still leaves the ultimate ethical test: **I
 
 **Domain 6 Summary Checklist**
 
-```
-1. SUITABILITY ──► Ask "Should we?" and keep humans in control of decisions affecting people[cite: 15].
-2. DATA GUARD  ──► Classify data, apply the Postcard Rule, minimize and mask all sensitive PII[cite: 15].
-3. GOVERNANCE  ──► Follow approved/banned policy rules; in ambiguous gaps, pause and escalate[cite: 15].
-4. ETHICS      ──► Ensure outputs are Honest, Fair, Transparent, and Harmless; own the outcome[cite: 15].
-
-```
+1. **SUITABILITY** ──► Ask "Should we?" and keep humans in control of decisions affecting people[cite: 15].
+2. **DATA GUARD** ──► Classify data, apply the Postcard Rule, minimize and mask all sensitive PII[cite: 15].
+3. **GOVERNANCE** ──► Follow approved/banned policy rules; in ambiguous gaps, pause and escalate[cite: 15].
+4. **ETHICS** ──► Ensure outputs are Honest, Fair, Transparent, and Harmless; own the outcome[cite: 15].

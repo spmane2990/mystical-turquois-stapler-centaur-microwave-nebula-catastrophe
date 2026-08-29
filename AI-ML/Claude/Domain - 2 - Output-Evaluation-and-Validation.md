@@ -22,23 +22,11 @@ Evaluating an output requires two distinct checks:
 
 **Lecture 2: Hallucinations, Inconsistencies & Bias**
 
-| Error Type            | Scope                       | Simple Meaning                      | Real-World Example |
-| --------------------- | --------------------------- | ----------------------------------- | ------------------ |
-| **Hallucination**<br> | Wrong vs. **The World**<br> | Claude invented an ungrounded claim |
-
-| Citing a non-existent law or dead URL
-
-|
-| **Inconsistency**<br> | Wrong vs. **Itself**<br> | Claude contradicts its own earlier output
-
-| Stating complaints rose on slide 2, but declined on slide 5
-
-|
-| **Bias**<br> | Unbalanced vs. **Reality**<br> | Claude generates a one-sided perspective
-
-| Listing only benefits and zero operational risks
-
-|
+| Error Type        | Scope                      | Simple Meaning                            | Real-World Example                                          |
+| ----------------- | -------------------------- | ----------------------------------------- | ----------------------------------------------------------- |
+| **Hallucination** | Wrong vs. **The World**    | Claude invented an ungrounded claim       | Citing a non-existent law or dead URL                       |
+| **Inconsistency** | Wrong vs. **Itself**       | Claude contradicts its own earlier output | Stating complaints rose on slide 2, but declined on slide 5 |
+| **Bias**          | Unbalanced vs. **Reality** | Claude generates a one-sided perspective  | Listing only benefits and zero operational risks            |
 
 - **Mechanism of Hallucination**: Models predict the most probable next token. Lying requires intent; hallucination is a confident wrong guess with no internal alarm mechanism.
 
