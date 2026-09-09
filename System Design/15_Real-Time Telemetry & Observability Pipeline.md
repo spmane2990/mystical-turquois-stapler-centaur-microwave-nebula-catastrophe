@@ -15,7 +15,7 @@ It replaces disparate vendor consoles with an **OpenTelemetry (OTel)** standard 
 
 - **Trace Context Propagation:** Trace an end-to-end data transaction using a single `trace_id`:
 
-$$\text{Source Webhook} \xrightarrow{\text{trace\_id}} \text{Lambda Ingest} \xrightarrow{\text{trace\_id}} \text{Databricks Bronze/Silver} \xrightarrow{\text{trace\_id}} \text{Snowflake Gold}$$
+$$\text{Source Webhook} \xrightarrow{\text{trace-id}} \text{Lambda Ingest} \xrightarrow{\text{trace-id}} \text{Databricks Bronze/Silver} \xrightarrow{\text{trace-id}} \text{Snowflake Gold}$$
 
 - **Retention & Cost Optimization:** Hot searchable layer ($15\text{ days}$), warm analytical layer ($90\text{ days}$), and cold compliance archive ($365\text{ days}$) using automated Parquet compaction and S3 Lifecycle tiering.
 
