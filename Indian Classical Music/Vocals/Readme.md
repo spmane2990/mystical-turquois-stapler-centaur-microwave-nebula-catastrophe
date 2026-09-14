@@ -1,5 +1,32 @@
 हिंदुस्तानी शास्त्रीय संगीताचा पाया (Basic) ते प्रावीण्य (Expert/विशारद/अलंकार) स्तरापर्यंत पद्धतशीरपणे अभ्यास करण्यासाठी **एकूण २४ प्रकरणांचा (Chapters)** सर्वसमावेशक अभ्यासक्रम खालीलप्रमाणे आखला आहे. हा आराखडा गांधर्व महाविद्यालय तसेच पारंपारिक गुरू-शिष्य परंपरेचा मेळ घालून तयार केला आहे.
 
+## त्वरित नेव्हिगेशन / Quick Navigation
+
+- [प्रकरण १: नाद, श्रुती आणि स्वरशास्त्र](./विभाग%201%20Foundations/प्रकरण%201%20Introduction%20to%20Sound%20&%20Microtones.md)
+- [प्रकरण २: स्वर, सप्तक आणि आवाज संवर्धन](./विभाग%201%20Foundations/प्रकरण%202%20Swaras,%20Octaves%20&%20Voice%20Cultivation.md)
+- [प्रकरण ३: ताल आणि लयाची मूलतत्त्वे](./विभाग%201%20Foundations/प्रकरण%203%20Rhythm%20&%20Tala%20Fundamentals.md)
+- [प्रकरण ४: व्यायाम आणि पल्टा साधना](./विभाग%201%20Foundations/प्रकरण%204%20Vocal%20Exercises%20&%20Patterns.md)
+- [प्रकरण ५: थाट व्यवस्था आणि राग व्याकरण](./विभाग%201%20Foundations/प्रकरण%205%20Thaat%20System%20&%20Raga%20Grammar.md)
+- [प्रकरण ६: स्वरलिपी पद्धत](./विभाग%202%20Intermediate%20Raags%20&%20Rhythm%20Systems/प्रकरण%206%20Notation%20Systems.md)
+- [प्रकरण ७: मूलभूत राग](./विभाग%202%20Intermediate%20Raags%20&%20Rhythm%20Systems/प्रकरण%207%20Foundational%20Ragas.md)
+- [प्रकरण ८: रागविस्ताराची तंत्रे](./विभाग%202%20Intermediate%20Raags%20&%20Rhythm%20Systems/प्रकरण%208%20Elaboration%20of%20Raga.md)
+- [प्रकरण ९: मध्य स्तर रागमाला - भाग १](./विभाग%202%20Intermediate%20Raags%20&%20Rhythm%20Systems/प्रकरण%209%20मध्य%20स्तर%20रागमाला%20-%20भाग%20१.md)
+- [प्रकरण १०: मध्य स्तर रागमाला - भाग २](<./विभाग%202%20Intermediate%20Raags%20&%20Rhythm%20Systems/प्रकरण%2010%20मध्य%20स्तर%20रागमाला%20-%20भाग%202%20(सकाळचे%20व%20दुपारचे%20राग).md>)
+- [प्रकरण ११: ताल आणि लयकारी](./विभाग%202%20Intermediate%20Raags%20&%20Rhythm%20Systems/प्रकरण%2011%20Intermediate%20Talas%20&%20Layakari.md)
+- [प्रकरण १२: बडा ख्याल](./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2012%20Vilambit%20Bada%20Khayal.md)
+- [प्रकरण १३: सूक्ष्म अलंकार](./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2013%20Micro-ornamentation%20Techniques.md)
+- [प्रकरण १४: घराणी](./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2014%20Gharanas%20of%20Hindustani%20Music.md)
+- [प्रकरण १५: प्राचीन गायन प्रकार](./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2015%20Classical%20Genres.md)
+- [प्रकरण १६: विशारद स्तर रागमाला - भाग १](<./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2016%20विशारद%20स्तर%20रागमाला%20—%20भाग%201%20(प्रौढ%20राग).md>)
+- [प्रकरण १७: विशारद स्तर रागमाला - भाग २](<./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2017%20विशारद%20स्तर%20रागमाला%20—%20भाग%202%20(जोड%20राग%20व%20संकीर्ण%20राग).md>)
+- [प्रकरण १८: उप-शास्त्रीय संगीत](./विभाग%204%20Visharad%20Ragas%20&%20Applied%20Musicology/प्रकरण%2018%20Semi-Classical%20&%20Light%20Classical%20Forms.md)
+- [प्रकरण १९: संगीत इतिहास](./विभाग%204%20Visharad%20Ragas%20&%20Applied%20Musicology/प्रकरण%2019%20Historical%20Evolution.md)
+- [प्रकरण २०: रस सिद्धांत](./विभाग%204%20Visharad%20Ragas%20&%20Applied%20Musicology/प्रकरण%2020%20Aesthetics%20&%20Rasa%20Theory.md)
+- [प्रकरण २१: क्लिष्ट राग](./विभाग%205%20Master%20Level%20&%20Certification/प्रकरण%2021%20Complex%20&%20Rare%20Ragas.md)
+- [प्रकरण २२: लयकारी व गणित](./विभाग%205%20Master%20Level%20&%20Certification/प्रकरण%2022%20Advanced%20Layakari%20&%20Tihai%20Mathematics.md)
+- [प्रकरण २३: बंदिश व सादरीकरण](./विभाग%205%20Master%20Level%20&%20Certification/प्रकरण%2023%20Composition%20&%20Bandish%20Aesthetics.md)
+- [प्रकरण २४: मैफिल व अध्यापन](./विभाग%205%20Master%20Level%20&%20Certification/प्रकरण%2024%20Concert%20Mastery%20&%20Pedagogy.md)
+
 ---
 
 ### **विभाग १: पायाभूत संकल्पना (प्रारंभिक व प्रवेशिका स्तर)**

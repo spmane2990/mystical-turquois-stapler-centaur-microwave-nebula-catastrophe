@@ -2,6 +2,38 @@
 
 हिंदुस्तानी शास्त्रीय गायनाच्या मूलभूत संकल्पनांपासून ते पदवी (विशारद) स्तरापर्यंतच्या सर्व सैद्धांतिक, प्रात्यक्षिक आणि ऐतिहासिक अंगांचा संपूर्ण संदर्भ ग्रंथ.
 
+## त्वरित नेव्हिगेशन / Quick Navigation
+
+- [प्रकरण १: Hands-on Practice](./विभाग%201%20Foundations/प्रकरण%201%20Hands-on%20Practice.md)
+- [प्रकरण २: Practical Drills](./विभाग%201%20Foundations/प्रकरण%202%20Practical%20Drills.md)
+- [प्रकरण ३: Hands-on Tala & Layakari](./विभाग%201%20Foundations/प्रकरण%203%20Hands-on%20Tala%20&%20Layakari.md)
+- [प्रकरण ४: Advanced Palta Drills](./विभाग%201%20Foundations/प्रकरण%204%20Advanced%20Palta%20Drills.md)
+- [प्रकरण ५: Thaat System & Raga Grammar](./विभाग%201%20Foundations/प्रकरण%205%20Thaat%20System%20&%20Raga%20Grammar.md)
+- [प्रकरण ६: Notation System & Reading Music](./विभाग%202%20Intermediate%20Raags%20&%20Rhythm%20Systems/प्रकरण%206%20Notation%20System%20&%20Reading%20Music.md)
+- [प्रकरण ७: Raga Yaman Practical](./विभाग%202%20Intermediate%20Raags%20&%20Rhythm%20Systems/प्रकरण%207%20Raga%20Yaman%20Practical.md)
+- [प्रकरण ७.१: राग यमन स्थायी आणि अंतरा](./विभाग%202%20Intermediate%20Raags%20&%20Rhythm%20Systems/प्रकरण%207.१%20राग%20यमन%20स्थायी%20आणि%20अंतरा.md)
+- [प्रकरण ७.२: राग यमन Hands-on Layakari & Tihai](./विभाग%202%20Intermediate%20Raags%20&%20Rhythm%20Systems/प्रकरण%207.२%20राग%20यमन%20Hands-on%20Layakari%20&%20Tihai.md)
+- [प्रकरण ८: राग भूप (भूपाल)](<./विभाग%202%20Intermediate%20Raags%20&%20Rhythm%20Systems/प्रकरण%208%20राग%20भूप%20(भूपाल).md>)
+- [प्रकरण ९: राग अलहैया बिलावल](./विभाग%202%20Intermediate%20Raags%20&%20Rhythm%20Systems/प्रकरण%209%20राग%20अलहैया%20बिलावल.md)
+- [प्रकरण १०: राग खमाज (खमाज थाट)](<./विभाग%202%20Intermediate%20Raags%20&%20Rhythm%20Systems/प्रकरण%2010%20राग%20खमाज%20(खमाज%20थाट).md>)
+- [प्रकरण ११: Advanced Talas & Layakari Mathematics](./विभाग%202%20Intermediate%20Raags%20&%20Rhythm%20Systems/प्रकरण%2011%20Advanced%20Talas%20&%20Layakari%20Mathematics.md)
+- [प्रकरण १२: Vilambit Khayal Mastery](./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2012%20Vilambit%20Khayal%20Mastery.md)
+- [प्रकरण १२.१: बडा ख्याल](./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2012.१%20बडा%20ख्याल.md)
+- [प्रकरण १३: Micro-ornamentation Techniques](./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2013%20Micro-ornamentation%20Techniques.md)
+- [प्रकरण १३.१: प्राचीन संगीतातील १५ गमक](./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2013.१%20प्राचीन%20संगीतातील%2015%20गमक.md)
+- [प्रकरण १४: Gharanas of Hindustani Music](./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2014%20Gharanas%20of%20Hindustani%20Music.md)
+- [प्रकरण १५: Dhrupad, Dhamar, Tarana & Chaturang](./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2015%20Dhrupad,%20Dhamar,%20Tarana%20&%20Chaturang.md)
+- [प्रकरण १६: Darvari, Miya Malhar & Marwa](./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2016%20Darvari,%20Miya%20Malhar%20&%20Marwa.md)
+- [प्रकरण १६.१: राग दरबारी कानडा](./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2016.१%20राग%20दरबारी%20कानडा.md)
+- [प्रकरण १७: Compound & Complex Ragas](./विभाग%203%20Advanced%20Khayal,%20Ornamentation%20&%20Traditions/प्रकरण%2017%20Compound%20&%20Complex%20Ragas.md)
+- [प्रकरण १८: Semi-Classical & Marathi Theater Music](./विभाग%204%20Visharad%20Ragas%20&%20Applied%20Musicology/प्रकरण%2018%20Semi-Classical%20&%20Marathi%20Theater%20Music.md)
+- [प्रकरण १९: Historical Evolution & Musicology](./विभाग%204%20Visharad%20Ragas%20&%20Applied%20Musicology/प्रकरण%2019%20Historical%20Evolution%20&%20Musicology.md)
+- [प्रकरण २०: Aesthetics & Performance Psychology](./विभाग%204%20Visharad%20Ragas%20&%20Applied%20Musicology/प्रकरण%2020%20Aesthetics%20&%20Performance%20Psychology.md)
+- [प्रकरण २१: Complex & Rare Ragas](./विभाग%205%20Master%20Level%20&%20Certification/प्रकरण%2021%20Complex%20&%20Rare%20Ragas.md)
+- [प्रकरण २२: Complex Layakari & Tihai Mathematics](./विभाग%205%20Master%20Level%20&%20Certification/प्रकरण%2022%20Complex%20Layakari%20&%20Tihai%20Mathematics.md)
+- [प्रकरण २३: Viva-Voce & Stage Mastery](./विभाग%205%20Master%20Level%20&%20Certification/प्रकरण%2023%20Viva-Voce%20&%20Stage%20Mastery.md)
+- [परिशिष्ट: आवाज संवर्धन, खर्ज साधना आणि घशाचे आरोग्य](./शास्त्रीय%20गायकांसाठी%20आवाज%20संवर्धन,%20खर्ज%20साधना,%20दमसास%20वाढवणे%20आणि%20घशाचे%20आरोग्य%20जपण्याचे%20शास्त्रीय%20उपाय.md)
+
 ---
 
 ## अभ्यासक्रम अनुक्रमणिका (Index)
